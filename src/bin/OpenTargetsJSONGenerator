@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ -L $0 ]];
+then
+    wherearewe=$( cd "$(dirname "`readlink $0`")" ; pwd -P );
+else
+    wherearewe=$( cd "$(dirname "$0")" ; pwd -P );
+fi
+mainClass=uk.ac.ebi.uniprot.ot.cli.DiseaseAssocGenerator
+
+app_jar=$(ls $wherearewe/../../target/open-targets-*-shade.jar);
+$JAVA_HOME/bin/java -Dlog=INFO -classpath $app_jar $mainClass $@

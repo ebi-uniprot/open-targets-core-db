@@ -71,7 +71,7 @@ public class DiseaseAssocProducer {
                 }
 
             } catch (IOException exception) {
-                LOGGER.error("Error writing to output file, {}", outputFile.getFileName().toString());
+                LOGGER.error("Error writing to output file, {}", outputFile.getFileName());
                 LOGGER.error("Exception Info: {}", exception);
             }
 

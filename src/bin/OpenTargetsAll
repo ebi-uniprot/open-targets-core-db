@@ -1,0 +1,40 @@
+#! /bin/bash
+
+set -e
+
+echo "Fetching public UniProt version number"
+
+version="$(curl -s -I "https://www.uniprot.org/downloads" | grep "X-UniProt-Release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
+omimEfoMappingsFile="omim2efo.mappings"
+
+if [ "$1" == "all" ]; then
+     # build the jar
+     echo "Creating the Open-Targets JAR"
+     current_dir=$(pwd)
+     cd ../..
+     mvn clean package -DskipTests
+     cd $current_dir
+
+     # get the OMIM/EFO mappings
+     echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
+    ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
+fi
+
+echo "Creating Open-Targets JSON data ..."
+timeStamp=$(date "+%N")
+logFile="open-targets-$timeStamp.log"
+jsonOutputFile="uniprot-valid.json"
+command="./OpenTargetsJSONGenerator -o $jsonOutputFile -efo $omimEfoMappingsFile -version $version -validate -somaticDbSNP uniprot_somatic_census.txt"
+echo "Generating evidence strings:"
+echo "   command: $command"
+$command > $logFile 2>&1
+
+echo "Validating $jsonOutputFile"
+./OpenTargetsValidateJSON $jsonOutputFile
+echo "Disease association count: $(wc -l $jsonOutputFile)"
+echo "Compressing $jsonOutputFile"
+./OpenTargetsJSONZipper $jsonOutputFile
+
+echo "Finished. Zipped JSON file can now be uploaded to Open-Targets"
+echo "  Google Bucket location:         https://console.cloud.google.com/storage/browser/otar011-uniprot/"
+echo "  As an alternative, contact:     data@opentargets.org"

@@ -6,7 +6,12 @@ import com.google.inject.name.Names;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
-import uk.ac.ebi.kraken.parser.NewEntryIterator;
+import uk.ac.ebi.uniprot.dataservice.client.Client;
+import uk.ac.ebi.uniprot.dataservice.client.ServiceFactory;
+import uk.ac.ebi.uniprot.dataservice.client.exception.ServiceException;
+import uk.ac.ebi.uniprot.dataservice.client.uniprot.UniProtQueryBuilder;
+import uk.ac.ebi.uniprot.dataservice.client.uniprot.UniProtService;
+import uk.ac.ebi.uniprot.dataservice.query.Query;
 import uk.ac.ebi.uniprot.ot.cli.DiseaseAssocConfig;
 import uk.ac.ebi.uniprot.ot.mapper.FFOmim2EfoMapper;
 import uk.ac.ebi.uniprot.ot.mapper.Omim2EfoMapper;
@@ -33,7 +38,8 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
         this.config = config;
     }
 
-    @Override protected void configure() {
+    @Override
+    protected void configure() {
         bind(BaseFactory.class).to(DefaultBaseFactory.class);
 
         bind(File.class).annotatedWith(Names.named("outputFile")).toInstance(
@@ -45,12 +51,28 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
     }
 
     @Provides
-    private Iterator<UniProtEntry> getUniProtEntryIterator() throws FileNotFoundException {
-        NewEntryIterator entryIterator = new NewEntryIterator(ENTRY_ITERATOR_THREAD_COUNT,
-                                                              ENTRY_ITERATOR_ENTRY_QUEUESIZE,
-                                                              ENTRY_ITERATOR_FF_QUEUE_SIZE);
-        entryIterator.setInput(config.getUniprotFFPath());
-        return entryIterator;
+    Iterator<UniProtEntry> getUniProtEntryIterator(UniProtService uniProtService) throws FileNotFoundException, ServiceException {
+//        NewEntryIterator entryIterator = new NewEntryIterator(ENTRY_ITERATOR_THREAD_COUNT,
+//                                                              ENTRY_ITERATOR_ENTRY_QUEUESIZE,
+//                                                              ENTRY_ITERATOR_FF_QUEUE_SIZE);
+//        entryIterator.setInput(config.getUniprotFFPath());
+//        return entryIterator;
+
+//        ServiceFactory serviceFactoryInstance = Client.getServiceFactoryInstance();
+//        UniProtService uniProtService = serviceFactoryInstance.getUniProtQueryService();
+//        uniProtService.start();
+
+        Query swissprot = UniProtQueryBuilder.swissprot();
+
+        return uniProtService.getEntries(swissprot);
+    }
+
+    @Provides
+    UniProtService getUniProtService() {
+        ServiceFactory serviceFactoryInstance = Client.getServiceFactoryInstance();
+        UniProtService uniProtService = serviceFactoryInstance.getUniProtQueryService();
+        uniProtService.start();
+        return uniProtService;
     }
 
     @Provides

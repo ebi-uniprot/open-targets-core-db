@@ -19,13 +19,9 @@ public class DiseaseAssocConfig {
     // logger
     private static final Logger LOGGER = LoggerFactory.getLogger(DiseaseAssocGenerator.class);
 
-    public DiseaseAssocConfig() {
+    private DiseaseAssocConfig() {
         this.count = -1;
     }
-
-    @Parameter(names = "-source", required = true,
-            description = "Path to the SwissProt FF, based on which the data dump will be created")
-    private String uniprotFFPath;
 
     @Parameter(names = "-o", required = true,
             description = "Name of the data dump file to contain the evidence strings")
@@ -57,10 +53,6 @@ public class DiseaseAssocConfig {
         return this.verbose;
     }
 
-    public String getUniprotFFPath() {
-        return uniprotFFPath;
-    }
-
     public String getOutputFilePath() {
         return outputFilePath;
     }
@@ -83,10 +75,6 @@ public class DiseaseAssocConfig {
 
     public void setSomaticDbSNPFile(String somaticDbSNPFile) {
         this.somaticDbSNPFile = somaticDbSNPFile;
-    }
-
-    public void setUniprotFFPath(String uniprotFFPath) {
-        this.uniprotFFPath = uniprotFFPath;
     }
 
     public void setOutputFilePath(String outputFilePath) {
@@ -119,16 +107,6 @@ public class DiseaseAssocConfig {
         cmder.parse(args);
 
         // validate paths
-        File input = new File(uniprotFFPath);
-        if (!input.exists()) {
-            LOGGER.error("specified -source path ({}) does not exist", uniprotFFPath);
-            return false;
-        }
-        if (input.isDirectory()) {
-            LOGGER.error("specified -source path ({}) should be a file, but is a directory", uniprotFFPath);
-            return false;
-        }
-
         File output = new File(outputFilePath);
         if (output.exists()) {
             LOGGER.warn("Output file already exists ({}) and will be overwritten", outputFilePath);

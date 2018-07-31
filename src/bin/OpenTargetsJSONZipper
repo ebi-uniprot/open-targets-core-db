@@ -1,0 +1,20 @@
+#!/bin/bash
+if [[ -L $0 ]];
+then
+    wherearewe=$( cd "$(dirname "`readlink $0`")" ; pwd -P );
+else
+    wherearewe=$( cd "$(dirname "$0")" ; pwd -P );
+fi
+
+input_json=$1
+
+if [ ! -f $input_json ]; then
+    echo "The file $input_json does not exist"
+    exit 1
+else
+    dir_original=$(dirname $(readlink -e $input_json))
+    to_upload=$(date +"$dir_original/cttv011-%d-%m-%Y.json.gz")
+    gzip -c $input_json > "$to_upload"
+    echo "$input_json converted to $to_upload, ready for uploading"
+fi
+

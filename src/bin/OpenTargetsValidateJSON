@@ -1,0 +1,26 @@
+#!/bin/bash
+if [[ -L $0 ]];
+then
+    wherearewe=$( cd "$(dirname "`readlink $0`")" ; pwd -P );
+else
+    wherearewe=$( cd "$(dirname "$0")" ; pwd -P );
+fi
+
+cttv_file=$1
+
+if [ ! -f $cttv_file ]; then
+    echo "The file $cttv_file does not exist"
+    exit 1
+else
+    uniques=$(cat $cttv_file | grep -Po '\"unique_association_fields\":\{.*?\}' | sort | uniq | wc -l)
+    lines=$(cat $cttv_file | grep -Po '\"unique_association_fields\":\{.*?\}' | wc -l)
+    if [ $uniques = $lines ]; then
+        echo "INFO: All unique associations are unique!"
+        exit 0
+    else
+        echo "ERROR: The following unique associations, are not unique:"
+        cat $cttv_file | grep -Po '\"unique_association_fields\":\{.*?\}' | sort | uniq -cd
+        exit 1
+    fi
+fi
+
