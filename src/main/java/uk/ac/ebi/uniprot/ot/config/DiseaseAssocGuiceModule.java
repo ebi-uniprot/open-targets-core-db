@@ -7,19 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.kraken.parser.NewEntryIterator;
-import uk.ac.ebi.uniprot.tools.opentargets.cli.DiseaseAssocConfig;
-import uk.ac.ebi.uniprot.tools.opentargets.mapper.FFOmim2EfoMapper;
-import uk.ac.ebi.uniprot.tools.opentargets.mapper.Omim2EfoMapper;
-import uk.ac.ebi.uniprot.tools.opentargets.mapper.SomaticDbSNPMapper;
-import uk.ac.ebi.uniprot.tools.opentargets.model.factory.BaseFactory;
-import uk.ac.ebi.uniprot.tools.opentargets.model.factory.DefaultBaseFactory;
+import uk.ac.ebi.uniprot.ot.cli.DiseaseAssocConfig;
+import uk.ac.ebi.uniprot.ot.mapper.FFOmim2EfoMapper;
+import uk.ac.ebi.uniprot.ot.mapper.Omim2EfoMapper;
+import uk.ac.ebi.uniprot.ot.mapper.SomaticDbSNPMapper;
+import uk.ac.ebi.uniprot.ot.model.factory.BaseFactory;
+import uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 /**
- * Configuration bindings for a {@link DiseaseAssocProducer}.
+ * Configuration bindings for generating disease associations.
  * @author Edd <eddturner@ebi.ac.uk>
  */
 public class DiseaseAssocGuiceModule extends AbstractModule {
@@ -53,11 +53,13 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
         return entryIterator;
     }
 
-    @Provides Omim2EfoMapper provideOmim2EfoMapper() {
+    @Provides
+    Omim2EfoMapper provideOmim2EfoMapper() {
         return new FFOmim2EfoMapper(new File(config.getEfoFile()));
     }
 
-    @Provides SomaticDbSNPMapper provideSomaticDbSNPMapper() {
+    @Provides
+    SomaticDbSNPMapper provideSomaticDbSNPMapper() {
         return new SomaticDbSNPMapper(new File(config.getSomaticDbSNPFile()));
     }
 

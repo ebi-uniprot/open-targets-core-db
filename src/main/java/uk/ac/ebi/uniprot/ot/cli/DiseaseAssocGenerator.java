@@ -2,8 +2,8 @@ package uk.ac.ebi.uniprot.ot.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import uk.ac.ebi.uniprot.tools.opentargets.DiseaseAssocProducer;
-import uk.ac.ebi.uniprot.tools.opentargets.config.DiseaseAssocGuiceModule;
+import uk.ac.ebi.uniprot.ot.DiseaseAssocProducer;
+import uk.ac.ebi.uniprot.ot.config.DiseaseAssocGuiceModule;
 
 import java.io.IOException;
 

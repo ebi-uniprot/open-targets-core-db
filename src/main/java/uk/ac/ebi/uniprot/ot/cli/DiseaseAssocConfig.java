@@ -113,7 +113,7 @@ public class DiseaseAssocConfig {
         this.verbose = verbose;
     }
 
-    protected boolean validateArguments(String[] args) {
+    private boolean validateArguments(String[] args) {
         JCommander cmder = new JCommander(this);
 
         cmder.parse(args);
@@ -138,13 +138,13 @@ public class DiseaseAssocConfig {
         return true;
     }
 
-    public static DiseaseAssocConfig fromCommandLine(String[] args) throws IllegalArgumentException {
+    static DiseaseAssocConfig fromCommandLine(String[] args) {
         DiseaseAssocConfig commandLineHandler = new DiseaseAssocConfig();
 
         if (commandLineHandler.validateArguments(args)) {
             return commandLineHandler;
         } else {
-            throw new IllegalArgumentException("Invalid arguments supplied to CTTV DiseaseAssocConfig");
+            throw new IllegalArgumentException("Invalid arguments supplied to DiseaseAssocConfig");
         }
     }
 

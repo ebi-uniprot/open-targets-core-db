@@ -103,10 +103,8 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
         Map<String, List<LiteratureCuratedRoot>> litRootsMap =
                 litRoots.stream().collect(Collectors.groupingBy(LiteratureCuratedRoot::getSourceID));
 
-        List<LiteratureCuratedRoot> uniprotLit = litRootsMap.containsKey(UNIPROT_LITERATURE) ?
-                litRootsMap.get(UNIPROT_LITERATURE) : Collections.emptyList();
-        List<LiteratureCuratedRoot> somaticLit = litRootsMap.containsKey(UNIPROT_SOMATIC) ?
-                litRootsMap.get(UNIPROT_SOMATIC) : Collections.emptyList();
+        List<LiteratureCuratedRoot> uniprotLit = litRootsMap.getOrDefault(UNIPROT_LITERATURE, Collections.emptyList());
+        List<LiteratureCuratedRoot> somaticLit = litRootsMap.getOrDefault(UNIPROT_SOMATIC, Collections.emptyList());
 
         for (LiteratureCuratedRoot litRoot : uniprotLit) {
             Set<Literature> litRefs = new HashSet<>(litRoot.getLiterature().getReferences());
