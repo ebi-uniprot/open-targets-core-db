@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>uk.ac.ebi.uniprot</groupId>
     <artifactId>open-targets</artifactId>
-    <version>2018.7</version>
+    <version>1.0.0</version>
     <properties>
         <japi.version>[1.0.20,)</japi.version>
         <jcommander.version>1.47</jcommander.version>

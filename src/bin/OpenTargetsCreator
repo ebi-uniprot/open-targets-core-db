@@ -7,7 +7,7 @@ echo "Fetching public UniProt version number"
 version="$(curl -s -I "https://www.uniprot.org/downloads" | grep "X-UniProt-Release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
 omimEfoMappingsFile="omim2efo.mappings"
 
-if [ "$1" == "all" ]; then
+if [ "$1" == "-all" ]; then
      # build the jar
      echo "Creating the Open-Targets JAR"
      current_dir=$(pwd)
@@ -17,7 +17,10 @@ if [ "$1" == "all" ]; then
 
      # get the OMIM/EFO mappings
      echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
-    ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
+     ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
+elif [ ! -f $omimEfoMappingsFile ]; then
+     echo "ERROR: OMIM -> EFO mapping file not found. Please re-run this command with parameter: -all"
+     exit 1
 fi
 
 echo "Creating Open-Targets JSON data ..."
