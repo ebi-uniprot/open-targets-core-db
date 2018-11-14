@@ -1,28 +1,80 @@
+## This script creates the data-file to be submitted for UniProt to the Open-Targets project
+##     Program options:
+##     -all (optional) => use this the first time you run the script, or for each new data-release. It will fetch
+##                        OMIM to EFO mappings, and build the JAR file used to create the data-file to submit to open-targets.
+##     -version (optional) => specifies the UniProt version to appear in the data-file generated. Without
+##                            this argument, the version is obtained from the headers provided by https:www.uniprot.org.
+
+
 #! /bin/bash
 
 set -e
 
-echo "Fetching public UniProt version number"
+if [[ -L $0 ]];
+then
+    wherearewe=$( cd "$(dirname "`readlink $0`")" ; pwd -P );
+else
+    wherearewe=$( cd "$(dirname "$0")" ; pwd -P );
+fi
 
-version="$(curl -s -I "https://www.uniprot.org/downloads" | grep "X-UniProt-Release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
+## ------------ PROCESS ARGUMENTS ------------
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    -all)
+    CREATE_JAR_AND_MAPPINGS="YES"
+    shift # past argument
+    ;;
+    -version)
+    if [ -z "$2" ]; then 
+        echo "Please specify version number with -v|--uniprot-version option";
+    fi
+    VERSION="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    echo "Unknown option $1"
+    exit 1
+    ;;
+esac
+done
+
+## ------------ SET UP NECESSARY VARIABLES / FILES ------------
 omimEfoMappingsFile="omim2efo.mappings"
 
-if [ "$1" == "-all" ]; then
-     # build the jar
-     echo "Creating the Open-Targets JAR"
-     current_dir=$(pwd)
-     cd ../..
-     mvn clean package -DskipTests
-     cd $current_dir
+if [ ! -z "$CREATE_JAR_AND_MAPPINGS" ]; then
+    # build the jar
+    echo "Creating the Open-Targets JAR"
+    current_dir=$(pwd)
+    cd ../..
+    mvn clean package -DskipTests
+    cd $current_dir
 
-     # get the OMIM/EFO mappings
-     echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
-     ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
+    # get the OMIM/EFO mappings
+    echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
+    ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
 elif [ ! -f $omimEfoMappingsFile ]; then
      echo "ERROR: OMIM -> EFO mapping file not found. Please re-run this command with parameter: -all"
      exit 1
+elif ! ls $wherearewe/../../target/open-targets-*-shade.jar > /dev/null 2>&1; then
+     echo "ERROR: could not find jar file. To build it, please re-run this command with parameter: -all"
+     exit 1
 fi
 
+if [ ! -z "$VERSION" ]; then
+    version=$VERSION
+    echo "[$version]"
+else
+    echo "Fetching public UniProt version number"
+    version="$(curl -s -I "https://www.uniprot.org/downloads" | grep "X-UniProt-Release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
+    echo "[$version]"
+fi
+
+## ------------ CREATING THE DATA ------------
 echo "Creating Open-Targets JSON data ..."
 timeStamp=$(date "+%N")
 logFile="open-targets-$timeStamp.log"
