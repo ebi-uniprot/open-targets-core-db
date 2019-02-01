@@ -57,12 +57,15 @@ if [ ! -z "$CREATE_JAR_AND_MAPPINGS" ]; then
     # get the OMIM/EFO mappings
     echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
     ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
-elif [ ! -f $omimEfoMappingsFile ]; then
-     echo "ERROR: OMIM -> EFO mapping file not found. Please re-run this command with parameter: -all"
-     exit 1
-elif ! ls $wherearewe/../../target/open-targets-*-shade.jar > /dev/null 2>&1; then
-     echo "ERROR: could not find jar file. To build it, please re-run this command with parameter: -all"
-     exit 1
+else
+    echo "No parameter supplied. Attempting to read $omimEfoMappingsFile and use $wherearewe/../../target/open-targets-*-shade.jar."
+    if [ ! -f $omimEfoMappingsFile ]; then
+        echo "ERROR: OMIM -> EFO mapping file not found. Please re-run this command with parameter: -all"
+        exit 1
+    elif ! ls $wherearewe/../../target/open-targets-*-shade.jar > /dev/null 2>&1; then
+        echo "ERROR: could not find jar file. To build it, please re-run this command with parameter: -all"
+        exit 1
+    fi
 fi
 
 if [ ! -z "$VERSION" ]; then
