@@ -71,12 +71,19 @@ sys.setdefaultencoding("utf-8")
 terms=json.load(sys.stdin)
 try:
    for term in terms["_embedded"]["terms"]:
-      if "annotation" in term:
-         if "OMIM_definition_citation" in term["annotation"] and term["is_obsolete"] == False:
-            efo=term["iri"]
+      if term["is_obsolete"] == False:
+         efo=term["iri"]
+         #print term
+         if term["obo_xref"] != None:
             if omim2efo == "omim2efo":
-               for omim in term["annotation"]["OMIM_definition_citation"]:
-  	 	       print "{}\t{}\t{}".format(omim, efo, term["label"])
+               #print "bbb"
+
+               for obo_xref in term["obo_xref"]:
+                  #print "ccc"
+
+                  if obo_xref["database"] == "OMIM":
+                     omim = obo_xref["id"]
+                     print "OMIM:{}\t{}\t{}".format(omim, efo, term["label"])
             elif omim2efo == "longEfo2Omim":
                print "{}\t{}\t{}".format(efo, term["label"], ",".join(term["annotation"]["OMIM_definition_citation"]))
             else:

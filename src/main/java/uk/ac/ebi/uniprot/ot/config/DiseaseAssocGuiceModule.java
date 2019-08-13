@@ -11,7 +11,6 @@ import uk.ac.ebi.uniprot.dataservice.client.ServiceFactory;
 import uk.ac.ebi.uniprot.dataservice.client.exception.ServiceException;
 import uk.ac.ebi.uniprot.dataservice.client.uniprot.UniProtQueryBuilder;
 import uk.ac.ebi.uniprot.dataservice.client.uniprot.UniProtService;
-import uk.ac.ebi.uniprot.dataservice.query.Query;
 import uk.ac.ebi.uniprot.ot.cli.DiseaseAssocConfig;
 import uk.ac.ebi.uniprot.ot.mapper.FFOmim2EfoMapper;
 import uk.ac.ebi.uniprot.ot.mapper.Omim2EfoMapper;
@@ -20,11 +19,11 @@ import uk.ac.ebi.uniprot.ot.model.factory.BaseFactory;
 import uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 /**
  * Configuration bindings for generating disease associations.
+ *
  * @author Edd <eddturner@ebi.ac.uk>
  */
 public class DiseaseAssocGuiceModule extends AbstractModule {
@@ -51,20 +50,8 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
     }
 
     @Provides
-    Iterator<UniProtEntry> getUniProtEntryIterator(UniProtService uniProtService) throws FileNotFoundException, ServiceException {
-//        NewEntryIterator entryIterator = new NewEntryIterator(ENTRY_ITERATOR_THREAD_COUNT,
-//                                                              ENTRY_ITERATOR_ENTRY_QUEUESIZE,
-//                                                              ENTRY_ITERATOR_FF_QUEUE_SIZE);
-//        entryIterator.setInput(config.getUniprotFFPath());
-//        return entryIterator;
-
-//        ServiceFactory serviceFactoryInstance = Client.getServiceFactoryInstance();
-//        UniProtService uniProtService = serviceFactoryInstance.getUniProtQueryService();
-//        uniProtService.start();
-
-        Query swissprot = UniProtQueryBuilder.swissprot();
-
-        return uniProtService.getEntries(swissprot);
+    Iterator<UniProtEntry> getUniProtEntryIterator(UniProtService uniProtService) throws ServiceException {
+        return uniProtService.getEntries(UniProtQueryBuilder.swissprot());
     }
 
     @Provides
