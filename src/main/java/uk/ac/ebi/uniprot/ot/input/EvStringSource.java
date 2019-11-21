@@ -1,13 +1,12 @@
 package uk.ac.ebi.uniprot.ot.input;
 
 /**
- * Interface specifying a single data source unit for creating a list
- * of evidence strings.
+ * Interface specifying a single data source unit for creating a list of evidence strings.
  *
- * Currently a UniProtEntry wrapper.
+ * <p>Currently a UniProtEntry wrapper.
  *
  * @author Edd
  */
-public interface EvStringSource <T> {
-    T getEvidenceSource();
+public interface EvStringSource<T> {
+  T getEvidenceSource();
 }

@@ -10,34 +10,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Target {
-    @JsonProperty
-    private String target_type;
-    @JsonProperty
-    private String activity;
-    @JsonProperty
-    private String id;
+  @JsonProperty private String target_type;
+  @JsonProperty private String activity;
+  @JsonProperty private String id;
 
-    public String getTarget_type() {
-        return target_type;
-    }
+  public String getTarget_type() {
+    return target_type;
+  }
 
-    public void setTarget_type(String target_type) {
-        this.target_type = target_type;
-    }
+  public void setTarget_type(String target_type) {
+    this.target_type = target_type;
+  }
 
-    public String getActivity() {
-        return activity;
-    }
+  public String getActivity() {
+    return activity;
+  }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
+  public void setActivity(String activity) {
+    this.activity = activity;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 }

@@ -9,28 +9,28 @@ import java.util.List;
  * @author Edd <eddturner@ebi.ac.uk>
  */
 public class JacksonValidationReport implements ValidationReport {
-    private boolean succeeded = false;
-    private List<String> messages = new ArrayList<>();
+  private boolean succeeded = false;
+  private List<String> messages = new ArrayList<>();
 
-    public void setSucceeded(boolean succeeded) {
-        this.succeeded = succeeded;
-    }
+  public void setSucceeded(boolean succeeded) {
+    this.succeeded = succeeded;
+  }
 
-    public boolean addMessage(String message) {
-        return this.messages.add(message);
-    }
+  public boolean addMessage(String message) {
+    return this.messages.add(message);
+  }
 
-    public void setMessages(List<String> messages) {
-        this.messages = messages;
-    }
+  public void setMessages(List<String> messages) {
+    this.messages = messages;
+  }
 
-    @Override
-    public boolean succeeded() {
-        return this.succeeded;
-    }
+  @Override
+  public boolean succeeded() {
+    return this.succeeded;
+  }
 
-    @Override
-    public List<String> getMessages() {
-        return this.messages;
-    }
+  @Override
+  public List<String> getMessages() {
+    return this.messages;
+  }
 }

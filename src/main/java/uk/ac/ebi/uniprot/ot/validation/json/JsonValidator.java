@@ -9,5 +9,5 @@ import org.everit.json.schema.Schema;
  */
 @FunctionalInterface
 public interface JsonValidator {
-    ValidationReport validate(Schema schema, String jsonString);
+  ValidationReport validate(Schema schema, String jsonString);
 }

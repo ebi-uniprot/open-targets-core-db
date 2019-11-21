@@ -8,6 +8,7 @@ import java.util.List;
  * @author Edd <eddturner@ebi.ac.uk>
  */
 public interface ValidationReport {
-    boolean succeeded();
-    List<String> getMessages();
+  boolean succeeded();
+
+  List<String> getMessages();
 }

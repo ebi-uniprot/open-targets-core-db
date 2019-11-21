@@ -7,15 +7,15 @@ import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
  *
  * @author Edd
  */
-public class UniProtEvSource implements EvStringSource <UniProtEntry> {
-    private UniProtEntry uniProtEntry;
+public class UniProtEvSource implements EvStringSource<UniProtEntry> {
+  private UniProtEntry uniProtEntry;
 
-    @Override
-    public UniProtEntry getEvidenceSource() {
-        return this.uniProtEntry;
-    }
+  @Override
+  public UniProtEntry getEvidenceSource() {
+    return this.uniProtEntry;
+  }
 
-    public void setUniProtEntry(UniProtEntry uniProtEntry) {
-        this.uniProtEntry = uniProtEntry;
-    }
+  public void setUniProtEntry(UniProtEntry uniProtEntry) {
+    this.uniProtEntry = uniProtEntry;
+  }
 }
