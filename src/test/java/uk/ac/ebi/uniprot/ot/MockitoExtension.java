@@ -1,15 +1,15 @@
 package uk.ac.ebi.uniprot.ot;
 
+import static org.mockito.Mockito.mock;
+
+import java.lang.reflect.Parameter;
+
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.lang.reflect.Parameter;
-
-import static org.mockito.Mockito.mock;
 
 public class MockitoExtension implements TestInstancePostProcessor, ParameterResolver {
 

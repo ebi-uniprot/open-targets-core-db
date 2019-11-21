@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author Edd <eddturner@ebi.ac.uk>
  */
-public class JsonSchema4Validator implements JsonValidator {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JsonSchema4Validator.class);
+public class JsonSchemaValidator implements JsonValidator {
+  private static final Logger LOGGER = LoggerFactory.getLogger(JsonSchemaValidator.class);
 
   @Override
   public ValidationReport validate(Schema schema, String jsonString) {
