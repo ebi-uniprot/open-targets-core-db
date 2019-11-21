@@ -1,13 +1,13 @@
 package uk.ac.ebi.uniprot.ot.validation.json;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import org.everit.json.schema.Schema;
 
 /**
- * Validates against a JSON schema a specified JSON instance.
+ * Validates a JSON instance against a JSON schema.
  *
  * @author Edd <eddturner@ebi.ac.uk>
  */
 @FunctionalInterface
 public interface JsonValidator {
-    ValidationReport validate(JsonNode schema, JsonNode instance);
+    ValidationReport validate(Schema schema, String jsonString);
 }

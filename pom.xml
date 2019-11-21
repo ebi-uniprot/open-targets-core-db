@@ -77,9 +77,9 @@
             <version>${guice.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.fge</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>${json-schema-validator.version}</version>
+            <groupId>com.github.everit-org.json-schema</groupId>
+            <artifactId>org.everit.json.schema</artifactId>
+            <version>1.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -98,7 +98,9 @@
         </dependency>
 
     </dependencies>
+  
     <build>
+
         <pluginManagement>
             <plugins>
                 <!-- This is to create an uber-jar which contains all the dependencies. -->
@@ -202,6 +204,10 @@
             <id>ebi-repo</id>
             <name>ebi-repo</name>
             <url>http://www.ebi.ac.uk/~maven/m2repo</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 

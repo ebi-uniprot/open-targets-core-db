@@ -51,6 +51,7 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
 
     @Provides
     Iterator<UniProtEntry> getUniProtEntryIterator(UniProtService uniProtService) throws ServiceException {
+//        return uniProtService.getEntries(UniProtQueryBuilder.accession("O14672"));
         return uniProtService.getEntries(UniProtQueryBuilder.swissprot());
     }
 
