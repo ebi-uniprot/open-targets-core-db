@@ -49,7 +49,7 @@ public class DefaultBaseFactory implements BaseFactory {
   public static final String UNIPROT_SOMATIC = "uniprot_somatic";
   public static final String DB_SNP_URI_FORMAT = "http://identifiers.org/dbsnp/%s";
   public static final String UNIPROT_LITERATURE = "uniprot_literature";
-  public static final String CTTV_SCHEMA_VERSION = "1.6.2";
+  public static final String CTTV_SCHEMA_VERSION = "1.6.3";
   // logger
   protected static final Logger LOGGER = LoggerFactory.getLogger(DefaultBaseFactory.class);
   static final String ACCESS_LEVEL = "public";
