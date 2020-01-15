@@ -18,7 +18,6 @@ This will create several files:
 Please view the logs generated to see whether many errors are being encountered. If unusual errors are seen, then fix the codebase and rerun the script.
 ### Log contents
 The contents of the log files often contains the following, which is not a problem:
-* WARN  u.a.e.u.o.v.j.JsonSchema4Validator - the following keywords are unknown and will be ignored: [import_remote_schemas, version]
 * WARN  u.a.e.u.ot.mapper.FFOmim2EfoMapper - No mapping found for OMIM: XXXXXX
 
 ## Submitting a data release
