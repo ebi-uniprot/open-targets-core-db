@@ -160,7 +160,9 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
 
   private Schema getSchemaLoader() throws IOException {
     File schemaFile = new File("json-schema-v" + CTTV_SCHEMA_VERSION + ".json");
-    FileUtils.copyURLToFile(new URL(SCHEMA_ADDRESS), schemaFile);
+    if (!schemaFile.exists()) {
+      FileUtils.copyURLToFile(new URL(SCHEMA_ADDRESS), schemaFile);
+    }
 
     JSONObject rawSchema;
     try (InputStream inputStream = new FileInputStream(schemaFile.getAbsolutePath())) {

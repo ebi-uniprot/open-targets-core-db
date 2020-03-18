@@ -1,16 +1,10 @@
 package uk.ac.ebi.uniprot.ot.model.factory;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
-
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
-
+import com.google.common.util.concurrent.AtomicDouble;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import uk.ac.ebi.kraken.interfaces.common.Value;
 import uk.ac.ebi.kraken.interfaces.uniprot.HasEvidences;
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
@@ -36,9 +30,13 @@ import uk.ac.ebi.uniprot.ot.model.provenance.LiteratureProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.provenance.ProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
 
-import com.google.common.util.concurrent.AtomicDouble;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 /**
  * Created 11/05/15
@@ -49,7 +47,7 @@ public class DefaultBaseFactory implements BaseFactory {
   public static final String UNIPROT_SOMATIC = "uniprot_somatic";
   public static final String DB_SNP_URI_FORMAT = "http://identifiers.org/dbsnp/%s";
   public static final String UNIPROT_LITERATURE = "uniprot_literature";
-  public static final String CTTV_SCHEMA_VERSION = "1.6.3";
+  public static final String CTTV_SCHEMA_VERSION = "1.6.7";
   // logger
   protected static final Logger LOGGER = LoggerFactory.getLogger(DefaultBaseFactory.class);
   static final String ACCESS_LEVEL = "public";
