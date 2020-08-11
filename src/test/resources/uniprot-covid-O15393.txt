@@ -1,0 +1,631 @@
+ID   TMPS2_HUMAN             Reviewed;         492 AA.
+AC   O15393; A8K6Z8; B2R8E5; B7Z459; D3DSJ2; F8WES1; Q6GTK7; Q9BXX1;
+DT   15-JUL-1998, integrated into UniProtKB/Swiss-Prot.
+DT   03-OCT-2006, sequence version 3.
+DT   12-AUG-2020, entry version 190.
+DE   RecName: Full=Transmembrane protease serine 2 {ECO:0000305};
+DE            EC=3.4.21.-;
+DE   AltName: Full=Serine protease 10 {ECO:0000305};
+DE   Contains:
+DE     RecName: Full=Transmembrane protease serine 2 non-catalytic chain;
+DE   Contains:
+DE     RecName: Full=Transmembrane protease serine 2 catalytic chain;
+DE   Flags: Precursor;
+GN   Name=TMPRSS2 {ECO:0000312|HGNC:HGNC:11876}; Synonyms=PRSS10;
+OS   Homo sapiens (Human).
+OC   Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi; Mammalia;
+OC   Eutheria; Euarchontoglires; Primates; Haplorrhini; Catarrhini; Hominidae;
+OC   Homo.
+OX   NCBI_TaxID=9606;
+RN   [1]
+RP   NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM 1), AND VARIANTS MET-160 AND GLN-329.
+RX   PubMed=9325052; DOI=10.1006/geno.1997.4845;
+RA   Paoloni-Giacobino A., Chen H., Peitsch M.C., Rossier C., Antonarakis S.E.;
+RT   "Cloning of the TMPRSS2 gene, which encodes a novel serine protease with
+RT   transmembrane, LDLRA, and SRCR domains and maps to 21q22.3.";
+RL   Genomics 44:309-320(1997).
+RN   [2]
+RP   NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM 1), AND VARIANT MET-160.
+RX   PubMed=11414763; DOI=10.1006/geno.2001.6551;
+RA   Teng D.-H., Chen Y., Lian L., Ha P.C., Tavtigian S.V., Wong A.K.C.;
+RT   "Mutation analyses of 268 candidate genes in human tumor cell lines.";
+RL   Genomics 74:352-364(2001).
+RN   [3]
+RP   NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM 1), MUTAGENESIS OF SER-441, FUNCTION,
+RP   AND SUBCELLULAR LOCATION.
+RX   PubMed=11245484;
+RA   Afar D.E.H., Vivanco I., Hubert R.S., Kuo J., Chen E., Saffran D.C.,
+RA   Raitano A.B., Jakobovits A.;
+RT   "Catalytic cleavage of the androgen-regulated TMPRSS2 protease results in
+RT   its secretion by prostate and prostate cancer epithelia.";
+RL   Cancer Res. 61:1686-1692(2001).
+RN   [4]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA] (ISOFORMS 1 AND 2).
+RC   TISSUE=Prostate, Testis, and Tongue;
+RX   PubMed=14702039; DOI=10.1038/ng1285;
+RA   Ota T., Suzuki Y., Nishikawa T., Otsuki T., Sugiyama T., Irie R.,
+RA   Wakamatsu A., Hayashi K., Sato H., Nagai K., Kimura K., Makita H.,
+RA   Sekine M., Obayashi M., Nishi T., Shibahara T., Tanaka T., Ishii S.,
+RA   Yamamoto J., Saito K., Kawai Y., Isono Y., Nakamura Y., Nagahari K.,
+RA   Murakami K., Yasuda T., Iwayanagi T., Wagatsuma M., Shiratori A., Sudo H.,
+RA   Hosoiri T., Kaku Y., Kodaira H., Kondo H., Sugawara M., Takahashi M.,
+RA   Kanda K., Yokoi T., Furuya T., Kikkawa E., Omura Y., Abe K., Kamihara K.,
+RA   Katsuta N., Sato K., Tanikawa M., Yamazaki M., Ninomiya K., Ishibashi T.,
+RA   Yamashita H., Murakawa K., Fujimori K., Tanai H., Kimata M., Watanabe M.,
+RA   Hiraoka S., Chiba Y., Ishida S., Ono Y., Takiguchi S., Watanabe S.,
+RA   Yosida M., Hotuta T., Kusano J., Kanehori K., Takahashi-Fujii A., Hara H.,
+RA   Tanase T.-O., Nomura Y., Togiya S., Komai F., Hara R., Takeuchi K.,
+RA   Arita M., Imose N., Musashino K., Yuuki H., Oshima A., Sasaki N.,
+RA   Aotsuka S., Yoshikawa Y., Matsunawa H., Ichihara T., Shiohata N., Sano S.,
+RA   Moriya S., Momiyama H., Satoh N., Takami S., Terashima Y., Suzuki O.,
+RA   Nakagawa S., Senoh A., Mizoguchi H., Goto Y., Shimizu F., Wakebe H.,
+RA   Hishigaki H., Watanabe T., Sugiyama A., Takemoto M., Kawakami B.,
+RA   Yamazaki M., Watanabe K., Kumagai A., Itakura S., Fukuzumi Y., Fujimori Y.,
+RA   Komiyama M., Tashiro H., Tanigami A., Fujiwara T., Ono T., Yamada K.,
+RA   Fujii Y., Ozaki K., Hirao M., Ohmori Y., Kawabata A., Hikiji T.,
+RA   Kobatake N., Inagaki H., Ikema Y., Okamoto S., Okitani R., Kawakami T.,
+RA   Noguchi S., Itoh T., Shigeta K., Senba T., Matsumura K., Nakajima Y.,
+RA   Mizuno T., Morinaga M., Sasaki M., Togashi T., Oyama M., Hata H.,
+RA   Watanabe M., Komatsu T., Mizushima-Sugano J., Satoh T., Shirai Y.,
+RA   Takahashi Y., Nakagawa K., Okumura K., Nagase T., Nomura N., Kikuchi H.,
+RA   Masuho Y., Yamashita R., Nakai K., Yada T., Nakamura Y., Ohara O.,
+RA   Isogai T., Sugano S.;
+RT   "Complete sequencing and characterization of 21,243 full-length human
+RT   cDNAs.";
+RL   Nat. Genet. 36:40-45(2004).
+RN   [5]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA] (ISOFORM 1).
+RC   TISSUE=Liver;
+RA   Suzuki Y., Sugano S., Totoki Y., Toyoda A., Takeda T., Sakaki Y.,
+RA   Tanaka A., Yokoyama S.;
+RL   Submitted (APR-2005) to the EMBL/GenBank/DDBJ databases.
+RN   [6]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA].
+RX   PubMed=10830953; DOI=10.1038/35012518;
+RA   Hattori M., Fujiyama A., Taylor T.D., Watanabe H., Yada T., Park H.-S.,
+RA   Toyoda A., Ishii K., Totoki Y., Choi D.-K., Groner Y., Soeda E., Ohki M.,
+RA   Takagi T., Sakaki Y., Taudien S., Blechschmidt K., Polley A., Menzel U.,
+RA   Delabar J., Kumpf K., Lehmann R., Patterson D., Reichwald K., Rump A.,
+RA   Schillhabel M., Schudy A., Zimmermann W., Rosenthal A., Kudoh J.,
+RA   Shibuya K., Kawasaki K., Asakawa S., Shintani A., Sasaki T., Nagamine K.,
+RA   Mitsuyama S., Antonarakis S.E., Minoshima S., Shimizu N., Nordsiek G.,
+RA   Hornischer K., Brandt P., Scharfe M., Schoen O., Desario A., Reichelt J.,
+RA   Kauer G., Bloecker H., Ramser J., Beck A., Klages S., Hennig S.,
+RA   Riesselmann L., Dagand E., Wehrmeyer S., Borzym K., Gardiner K.,
+RA   Nizetic D., Francis F., Lehrach H., Reinhardt R., Yaspo M.-L.;
+RT   "The DNA sequence of human chromosome 21.";
+RL   Nature 405:311-319(2000).
+RN   [7]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA].
+RA   Mural R.J., Istrail S., Sutton G.G., Florea L., Halpern A.L., Mobarry C.M.,
+RA   Lippert R., Walenz B., Shatkay H., Dew I., Miller J.R., Flanigan M.J.,
+RA   Edwards N.J., Bolanos R., Fasulo D., Halldorsson B.V., Hannenhalli S.,
+RA   Turner R., Yooseph S., Lu F., Nusskern D.R., Shue B.C., Zheng X.H.,
+RA   Zhong F., Delcher A.L., Huson D.H., Kravitz S.A., Mouchard L., Reinert K.,
+RA   Remington K.A., Clark A.G., Waterman M.S., Eichler E.E., Adams M.D.,
+RA   Hunkapiller M.W., Myers E.W., Venter J.C.;
+RL   Submitted (SEP-2005) to the EMBL/GenBank/DDBJ databases.
+RN   [8]
+RP   NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA] (ISOFORM 1).
+RC   TISSUE=PNS;
+RX   PubMed=15489334; DOI=10.1101/gr.2596504;
+RG   The MGC Project Team;
+RT   "The status, quality, and expansion of the NIH full-length cDNA project:
+RT   the Mammalian Gene Collection (MGC).";
+RL   Genome Res. 14:2121-2127(2004).
+RN   [9]
+RP   TISSUE SPECIFICITY.
+RX   PubMed=11169526;
+RX   DOI=10.1002/1096-9896(2000)9999:9999<::aid-path743>3.0.co;2-t;
+RA   Vaarala M.H., Porvari K.S., Kellokumpu S., Kyllonen A.P., Vihko P.T.;
+RT   "Expression of transmembrane serine protease TMPRSS2 in mouse and human
+RT   tissues.";
+RL   J. Pathol. 193:134-140(2001).
+RN   [10]
+RP   FUNCTION.
+RX   PubMed=15537383; DOI=10.1042/bj20041066;
+RA   Wilson S., Greer B., Hooper J., Zijlstra A., Walker B., Quigley J.,
+RA   Hawthorne S.;
+RT   "The membrane-anchored serine protease, TMPRSS2, activates PAR-2 in
+RT   prostate cancer cells.";
+RL   Biochem. J. 388:967-972(2005).
+RN   [11]
+RP   IDENTIFICATION BY MASS SPECTROMETRY, SUBCELLULAR LOCATION, TISSUE
+RP   SPECIFICITY, AND GLYCOSYLATION.
+RX   PubMed=20382709; DOI=10.2353/ajpath.2010.090665;
+RA   Chen Y.W., Lee M.S., Lucht A., Chou F.P., Huang W., Havighurst T.C.,
+RA   Kim K., Wang J.K., Antalis T.M., Johnson M.D., Lin C.Y.;
+RT   "TMPRSS2, a serine protease expressed in the prostate on the apical surface
+RT   of luminal epithelial cells and released into semen in prostasomes, is
+RT   misregulated in prostate cancer cells.";
+RL   Am. J. Pathol. 176:2986-2996(2010).
+RN   [12]
+RP   FUNCTION (MICROBIAL INFECTION), SUBCELLULAR LOCATION, AUTOCATALYTIC
+RP   CLEAVAGE, AND INTERACTION WITH ACE2.
+RX   PubMed=21068237; DOI=10.1128/jvi.02062-10;
+RA   Shulla A., Heald-Sargent T., Subramanya G., Zhao J., Perlman S.,
+RA   Gallagher T.;
+RT   "A transmembrane serine protease is linked to the severe acute respiratory
+RT   syndrome coronavirus receptor and activates virus entry.";
+RL   J. Virol. 85:873-882(2011).
+RN   [13]
+RP   FUNCTION (MICROBIAL INFECTION), AND TISSUE SPECIFICITY.
+RX   PubMed=21325420; DOI=10.1128/jvi.02232-10;
+RA   Glowacka I., Bertram S., Muller M.A., Allen P., Soilleux E., Pfefferle S.,
+RA   Steffen I., Tsegaye T.S., He Y., Gnirss K., Niemeyer D., Schneider H.,
+RA   Drosten C., Pohlmann S.;
+RT   "Evidence that TMPRSS2 activates the severe acute respiratory syndrome
+RT   coronavirus spike protein for membrane fusion and reduces viral control by
+RT   the humoral immune response.";
+RL   J. Virol. 85:4122-4134(2011).
+RN   [14]
+RP   FUNCTION (MICROBIAL INFECTION).
+RX   PubMed=23536651; DOI=10.1128/jvi.03372-12;
+RA   Bertram S., Dijkman R., Habjan M., Heurich A., Gierer S., Glowacka I.,
+RA   Welsch K., Winkler M., Schneider H., Hofmann-Winkler H., Thiel V.,
+RA   Pohlmann S.;
+RT   "TMPRSS2 activates the human coronavirus 229E for cathepsin-independent
+RT   host cell entry and is expressed in viral target cells in the respiratory
+RT   epithelium.";
+RL   J. Virol. 87:6150-6160(2013).
+RN   [15]
+RP   FUNCTION (MICROBIAL INFECTION).
+RX   PubMed=23966399; DOI=10.1128/jvi.01490-13;
+RA   Abe M., Tahara M., Sakai K., Yamaguchi H., Kanou K., Shirato K., Kawase M.,
+RA   Noda M., Kimura H., Matsuyama S., Fukuhara H., Mizuta K., Maenaka K.,
+RA   Ami Y., Esumi M., Kato A., Takeda M.;
+RT   "TMPRSS2 is an activating protease for respiratory parainfluenza viruses.";
+RL   J. Virol. 87:11930-11935(2013).
+RN   [16]
+RP   FUNCTION (MICROBIAL INFECTION).
+RX   PubMed=24027332; DOI=10.1128/jvi.01890-13;
+RA   Shirato K., Kawase M., Matsuyama S.;
+RT   "Middle East respiratory syndrome coronavirus infection mediated by the
+RT   transmembrane serine protease TMPRSS2.";
+RL   J. Virol. 87:12552-12561(2013).
+RN   [17]
+RP   FUNCTION (MICROBIAL INFECTION).
+RX   PubMed=24227843; DOI=10.1128/jvi.02202-13;
+RA   Heurich A., Hofmann-Winkler H., Gierer S., Liepold T., Jahn O.,
+RA   Poehlmann S.;
+RT   "TMPRSS2 and ADAM17 cleave ACE2 differentially and only proteolysis by
+RT   TMPRSS2 augments entry driven by the severe acute respiratory syndrome
+RT   coronavirus spike protein.";
+RL   J. Virol. 88:1293-1307(2014).
+RN   [18]
+RP   FUNCTION, AND INDUCTION.
+RX   PubMed=25122198; DOI=10.1158/2159-8290.cd-13-1010;
+RA   Lucas J.M., Heinlein C., Kim T., Hernandez S.A., Malik M.S., True L.D.,
+RA   Morrissey C., Corey E., Montgomery B., Mostaghel E., Clegg N., Coleman I.,
+RA   Brown C.M., Schneider E.L., Craik C., Simon J.A., Bedalov A., Nelson P.S.;
+RT   "The androgen-regulated protease TMPRSS2 activates a proteolytic cascade
+RT   involving components of the tumor microenvironment and promotes prostate
+RT   cancer metastasis.";
+RL   Cancer Discov. 4:1310-1325(2014).
+RN   [19]
+RP   FUNCTION.
+RX   PubMed=26018085; DOI=10.1158/0008-5472.can-14-3297;
+RA   Ko C.J., Huang C.C., Lin H.Y., Juan C.P., Lan S.W., Shyu H.Y., Wu S.R.,
+RA   Hsiao P.W., Huang H.P., Shun C.T., Lee M.S.;
+RT   "Androgen-Induced TMPRSS2 activates matriptase and promotes extracellular
+RT   matrix degradation, prostate cancer cell invasion, tumor growth, and
+RT   metastasis.";
+RL   Cancer Res. 75:2949-2960(2015).
+RN   [20]
+RP   FUNCTION (MICROBIAL INFECTION).
+RX   PubMed=32142651; DOI=10.1016/j.cell.2020.02.052;
+RA   Hoffmann M., Kleine-Weber H., Schroeder S., Krueger N., Herrler T.,
+RA   Erichsen S., Schiergens T.S., Herrler G., Wu N.H., Nitsche A.,
+RA   Mueller M.A., Drosten C., Poehlmann S.;
+RT   "SARS-CoV-2 cell entry depends on ACE2 and TMPRSS2 and is blocked by a
+RT   clinically proven protease inhibitor.";
+RL   Cell 181:1-10(2020).
+RN   [21]
+RP   TISSUE SPECIFICITY.
+RX   DOI=10.1016/j.cell.2020.04.035;
+RA   Ziegler C.G.K., Allon S.J., Nyquist S.K., Mbano I.M., Miao V.N.,
+RA   Tzouanas C.N., Cao Y., Yousif A.S., Bals J., Hauser B.M., Feldman J.,
+RA   Muus C., Wadsworth M.H., Kazer S.W., Hughes T.K., Doran B., Gatter G.J.,
+RA   Vukovic M., Taliaferro F., Mead B.E., Guo Z., Wang J.P., Gras D.,
+RA   Plaisant M., Ansari M., Angelidis I., Adler H., Sucre J.M.S., Taylor C.J.,
+RA   Lin B., Waghray A., Mitsialis V., Dwyer D.F., Buchheit K.M., Boyce J.A.,
+RA   Barrett N.A., Laidlaw T.M., Carroll S.L., Colonna L., Tkachev V.,
+RA   Peterson C.W., Yu A., Zheng H.B., Gideon H.P., Winchell C.G., Lin P.L.,
+RA   Bingle C.D., Snapper S.B., Kropski J.A., Theis F.J., Schiller H.B.,
+RA   Zaragosi L.E., Barbry P., Leslie A., Kiem H.P., Flynn J.L., Fortune S.M.,
+RA   Berger B., Finberg R.W., Kean L.S., Garber M., Schmidt A.G., Lingwood D.,
+RA   Shalek A.K., Ordovas-Montanes J.;
+RT   "SARS-CoV-2 receptor ACE2 is an interferon-stimulated gene in human airway
+RT   epithelial cells and is detected in specific cell subsets across tissues.";
+RL   Cell 0:0-0(2020).
+RN   [22]
+RP   TISSUE SPECIFICITY.
+RX   PubMed=32327758; DOI=10.1038/s41591-020-0868-6;
+RG   HCA Lung Biological Network;
+RA   Sungnak W., Huang N., Becavin C., Berg M., Queen R., Litvinukova M.,
+RA   Talavera-Lopez C., Maatz H., Reichart D., Sampaziotis F., Worlock K.B.,
+RA   Yoshida M., Barnes J.L.;
+RT   "SARS-CoV-2 entry factors are highly expressed in nasal epithelial cells
+RT   together with innate immune genes.";
+RL   Nat. Med. 0:0-0(2020).
+RN   [23]
+RP   VARIANTS MET-160; CYS-254; GLN-329 AND ASN-491.
+RX   PubMed=17918732; DOI=10.1002/humu.20617;
+RA   Guipponi M., Toh M.-Y., Tan J., Park D., Hanson K., Ballana E., Kwong D.,
+RA   Cannon P.Z.F., Wu Q., Gout A., Delorenzi M., Speed T.P., Smith R.J.H.,
+RA   Dahl H.-H.M., Petersen M., Teasdale R.D., Estivill X., Park W.J.,
+RA   Scott H.S.;
+RT   "An integrated genetic and functional analysis of the role of type II
+RT   transmembrane serine proteases (TMPRSSs) in hearing loss.";
+RL   Hum. Mutat. 29:130-141(2008).
+CC   -!- FUNCTION: Plasma membrane-anchored serine protease that participates in
+CC       proteolytic cascades of relevance for the normal physiologic function
+CC       of the prostate (PubMed:25122198). Androgen-induced TMPRSS2 activates
+CC       several substrates that include pro-hepatocyte growth factor/HGF, the
+CC       protease activated receptor-2/F2RL1 or matriptase/ST14 leading to
+CC       extracellular matrix disruption and metastasis of prostate cancer cells
+CC       (PubMed:15537383, PubMed:26018085, PubMed:25122198). In addition,
+CC       activates trigeminal neurons and contribute to both spontaneous pain
+CC       and mechanical allodynia (By similarity).
+CC       {ECO:0000250|UniProtKB:Q9JIQ8, ECO:0000269|PubMed:15537383,
+CC       ECO:0000269|PubMed:25122198, ECO:0000269|PubMed:26018085}.
+CC   -!- FUNCTION: (Microbial infection) Facilitates human coronaviruses SARS-
+CC       CoV and SARS-CoV-2 infections via two independent mechanisms,
+CC       proteolytic cleavage of ACE2 receptor which promotes viral uptake, and
+CC       cleavage of coronavirus spike glycoproteins which activates the
+CC       glycoprotein for host cell entry (PubMed:24227843, PubMed:32142651).
+CC       Proteolytically cleaves and activates the spike glycoproteins of human
+CC       coronavirus 229E (HCoV-229E) and human coronavirus EMC (HCoV-EMC) and
+CC       the fusion glycoproteins F0 of Sendai virus (SeV), human
+CC       metapneumovirus (HMPV), human parainfluenza 1, 2, 3, 4a and 4b viruses
+CC       (HPIV). Essential for spread and pathogenesis of influenza A virus
+CC       (strains H1N1, H3N2 and H7N9); involved in proteolytic cleavage and
+CC       activation of hemagglutinin (HA) protein which is essential for viral
+CC       infectivity. {ECO:0000269|PubMed:21068237, ECO:0000269|PubMed:21325420,
+CC       ECO:0000269|PubMed:23536651, ECO:0000269|PubMed:23966399,
+CC       ECO:0000269|PubMed:24027332, ECO:0000269|PubMed:24227843,
+CC       ECO:0000269|PubMed:32142651}.
+CC   -!- SUBUNIT: The catalytically active form interacts with ACE2.
+CC       {ECO:0000269|PubMed:21068237}.
+CC   -!- INTERACTION:
+CC       O15393; Q9BYF1: ACE2; NbExp=3; IntAct=EBI-12549863, EBI-7730807;
+CC       O15393-2; Q15848: ADIPOQ; NbExp=3; IntAct=EBI-12345267, EBI-10827839;
+CC       O15393-2; Q86W74-2: ANKRD46; NbExp=3; IntAct=EBI-12345267, EBI-12109402;
+CC       O15393-2; P29972: AQP1; NbExp=3; IntAct=EBI-12345267, EBI-745213;
+CC       O15393-2; O95393: BMP10; NbExp=3; IntAct=EBI-12345267, EBI-3922513;
+CC       O15393-2; Q12982: BNIP2; NbExp=3; IntAct=EBI-12345267, EBI-752094;
+CC       O15393-2; Q12983: BNIP3; NbExp=3; IntAct=EBI-12345267, EBI-749464;
+CC       O15393-2; Q6PL45-2: BRICD5; NbExp=3; IntAct=EBI-12345267, EBI-12244618;
+CC       O15393-2; Q86Z23: C1QL4; NbExp=3; IntAct=EBI-12345267, EBI-12062109;
+CC       O15393-2; O14523: C2CD2L; NbExp=3; IntAct=EBI-12345267, EBI-12822627;
+CC       O15393-2; Q9BXR6: CFHR5; NbExp=3; IntAct=EBI-12345267, EBI-11579371;
+CC       O15393-2; Q9BXN2-6: CLEC7A; NbExp=3; IntAct=EBI-12345267, EBI-11989440;
+CC       O15393-2; Q9NWW5: CLN6; NbExp=3; IntAct=EBI-12345267, EBI-6165897;
+CC       O15393-2; Q96FZ5: CMTM7; NbExp=3; IntAct=EBI-12345267, EBI-2807956;
+CC       O15393-2; Q6PI25: CNIH2; NbExp=3; IntAct=EBI-12345267, EBI-12815321;
+CC       O15393-2; Q8TBE1: CNIH3; NbExp=3; IntAct=EBI-12345267, EBI-12208021;
+CC       O15393-2; Q4LDR2: CTXN3; NbExp=3; IntAct=EBI-12345267, EBI-12019274;
+CC       O15393-2; Q07325: CXCL9; NbExp=3; IntAct=EBI-12345267, EBI-3911467;
+CC       O15393-2; Q9BQA9: CYBC1; NbExp=3; IntAct=EBI-12345267, EBI-2680384;
+CC       O15393-2; P81534: DEFB103B; NbExp=3; IntAct=EBI-12345267, EBI-12074168;
+CC       O15393-2; P56851: EDDM3B; NbExp=3; IntAct=EBI-12345267, EBI-10215665;
+CC       O15393-2; Q9UKR5: ERG28; NbExp=3; IntAct=EBI-12345267, EBI-711490;
+CC       O15393-2; Q92520: FAM3C; NbExp=3; IntAct=EBI-12345267, EBI-2876774;
+CC       O15393-2; Q96IV6: FAXDC2; NbExp=3; IntAct=EBI-12345267, EBI-12142299;
+CC       O15393-2; P24593: IGFBP5; NbExp=3; IntAct=EBI-12345267, EBI-720480;
+CC       O15393-2; Q6ZSS7: MFSD6; NbExp=3; IntAct=EBI-12345267, EBI-2858252;
+CC       O15393-2; O75425: MOSPD3; NbExp=3; IntAct=EBI-12345267, EBI-12179105;
+CC       O15393-2; Q9NZG7: NINJ2; NbExp=3; IntAct=EBI-12345267, EBI-10317425;
+CC       O15393-2; Q9UHJ9-5: PGAP2; NbExp=3; IntAct=EBI-12345267, EBI-12092917;
+CC       O15393-2; Q9Y342: PLLP; NbExp=3; IntAct=EBI-12345267, EBI-3919291;
+CC       O15393-2; P26678: PLN; NbExp=3; IntAct=EBI-12345267, EBI-692836;
+CC       O15393-2; P60201-2: PLP1; NbExp=3; IntAct=EBI-12345267, EBI-12188331;
+CC       O15393-2; Q04941: PLP2; NbExp=4; IntAct=EBI-12345267, EBI-608347;
+CC       O15393-2; Q13635-3: PTCH1; NbExp=3; IntAct=EBI-12345267, EBI-14199621;
+CC       O15393-2; P53801: PTTG1IP; NbExp=3; IntAct=EBI-12345267, EBI-3906138;
+CC       O15393-2; O00767: SCD; NbExp=4; IntAct=EBI-12345267, EBI-2684237;
+CC       O15393-2; Q96IW7: SEC22A; NbExp=3; IntAct=EBI-12345267, EBI-8652744;
+CC       O15393-2; Q9Y6D0: SELENOK; NbExp=3; IntAct=EBI-12345267, EBI-9679163;
+CC       O15393-2; P11686: SFTPC; NbExp=3; IntAct=EBI-12345267, EBI-10197617;
+CC       O15393-2; P78382: SLC35A1; NbExp=3; IntAct=EBI-12345267, EBI-12870360;
+CC       O15393-2; Q9NVC3: SLC38A7; NbExp=3; IntAct=EBI-12345267, EBI-10314552;
+CC       O15393-2; B2RUZ4: SMIM1; NbExp=3; IntAct=EBI-12345267, EBI-12188413;
+CC       O15393-2; O15400: STX7; NbExp=4; IntAct=EBI-12345267, EBI-3221827;
+CC       O15393-2; Q9UNK0: STX8; NbExp=3; IntAct=EBI-12345267, EBI-727240;
+CC       O15393-2; P17152: TMEM11; NbExp=3; IntAct=EBI-12345267, EBI-723946;
+CC       O15393-2; A0PK00: TMEM120B; NbExp=3; IntAct=EBI-12345267, EBI-10171534;
+CC       O15393-2; Q5BJH2-2: TMEM128; NbExp=3; IntAct=EBI-12345267, EBI-10694905;
+CC       O15393-2; A2RU14: TMEM218; NbExp=3; IntAct=EBI-12345267, EBI-10173151;
+CC       O15393-2; Q9H0R3: TMEM222; NbExp=3; IntAct=EBI-12345267, EBI-347385;
+CC       O15393-2; Q8NBD8: TMEM229B; NbExp=3; IntAct=EBI-12345267, EBI-12195227;
+CC       O15393-2; Q9BU79: TMEM243; NbExp=3; IntAct=EBI-12345267, EBI-12887458;
+CC       O15393-2; Q9H2L4: TMEM60; NbExp=3; IntAct=EBI-12345267, EBI-2852148;
+CC       O15393-2; Q9BSE2: TMEM79; NbExp=3; IntAct=EBI-12345267, EBI-8649725;
+CC       O15393-2; Q8N2M4: TMEM86A; NbExp=3; IntAct=EBI-12345267, EBI-12015604;
+CC       O15393-2; Q8N661: TMEM86B; NbExp=3; IntAct=EBI-12345267, EBI-2548832;
+CC       O15393-2; P01375: TNF; NbExp=3; IntAct=EBI-12345267, EBI-359977;
+CC       O15393-2; Q5BVD1: TTMP; NbExp=5; IntAct=EBI-12345267, EBI-10243654;
+CC       O15393-2; O00526: UPK2; NbExp=3; IntAct=EBI-12345267, EBI-10179682;
+CC       O15393-2; O95183: VAMP5; NbExp=3; IntAct=EBI-12345267, EBI-10191195;
+CC       O15393-2; Q9BQB6: VKORC1; NbExp=3; IntAct=EBI-12345267, EBI-6256462;
+CC       O15393-2; O95159: ZFPL1; NbExp=3; IntAct=EBI-12345267, EBI-718439;
+CC   -!- SUBCELLULAR LOCATION: Cell membrane {ECO:0000269|PubMed:20382709,
+CC       ECO:0000269|PubMed:21068237}; Single-pass type II membrane protein
+CC       {ECO:0000269|PubMed:20382709, ECO:0000269|PubMed:21068237}.
+CC   -!- SUBCELLULAR LOCATION: [Transmembrane protease serine 2 catalytic
+CC       chain]: Secreted {ECO:0000269|PubMed:20382709}. Note=Activated by
+CC       cleavage and secreted. {ECO:0000269|PubMed:11245484,
+CC       ECO:0000269|PubMed:20382709}.
+CC   -!- ALTERNATIVE PRODUCTS:
+CC       Event=Alternative splicing; Named isoforms=2;
+CC       Name=1;
+CC         IsoId=O15393-1; Sequence=Displayed;
+CC       Name=2;
+CC         IsoId=O15393-2; Sequence=VSP_045083;
+CC   -!- TISSUE SPECIFICITY: Expressed in several tissues that comprise large
+CC       populations of epithelial cells with the highest level of transcripts
+CC       measured in the prostate gland. Expressed in type II pneumocytes in the
+CC       lung (at protein level). Expressed strongly in small intestine. Also
+CC       expressed in colon, stomach and salivary gland. Coexpressed with ACE2
+CC       within lung type II pneumocytes, ileal absorptive enterocytes,
+CC       intestinal epithelial cells, cornea, gallbladder and nasal goblet
+CC       secretory cells (Ref.21). {ECO:0000269|PubMed:11169526,
+CC       ECO:0000269|PubMed:20382709, ECO:0000269|PubMed:21325420,
+CC       ECO:0000269|Ref.21}.
+CC   -!- INDUCTION: By androgenic hormones in vivo.
+CC       {ECO:0000269|PubMed:25122198}.
+CC   -!- PTM: Proteolytically processed; by an autocatalytic mechanism.
+CC   -!- SIMILARITY: Belongs to the peptidase S1 family. {ECO:0000255|PROSITE-
+CC       ProRule:PRU00274}.
+CC   -!- WEB RESOURCE: Name=Atlas of Genetics and Cytogenetics in Oncology and
+CC       Haematology;
+CC       URL="http://atlasgeneticsoncology.org/Genes/TMPRSS2ID42592ch21q22.html";
+CC   ---------------------------------------------------------------------------
+CC   Copyrighted by the UniProt Consortium, see https://www.uniprot.org/terms
+CC   Distributed under the Creative Commons Attribution (CC BY 4.0) License
+CC   ---------------------------------------------------------------------------
+DR   EMBL; U75329; AAC51784.1; -; mRNA.
+DR   EMBL; AF123453; AAD37117.1; -; mRNA.
+DR   EMBL; AF270487; AAK29280.1; -; mRNA.
+DR   EMBL; AK291813; BAF84502.1; -; mRNA.
+DR   EMBL; AK296860; BAH12445.1; -; mRNA.
+DR   EMBL; AK313338; BAG36142.1; -; mRNA.
+DR   EMBL; AK222784; BAD96504.1; -; mRNA.
+DR   EMBL; AP001610; -; NOT_ANNOTATED_CDS; Genomic_DNA.
+DR   EMBL; CH471079; EAX09597.1; -; Genomic_DNA.
+DR   EMBL; CH471079; EAX09598.1; -; Genomic_DNA.
+DR   EMBL; BC051839; AAH51839.1; -; mRNA.
+DR   CCDS; CCDS33564.1; -. [O15393-1]
+DR   CCDS; CCDS54486.1; -. [O15393-2]
+DR   RefSeq; NP_001128571.1; NM_001135099.1. [O15393-2]
+DR   RefSeq; NP_005647.3; NM_005656.3. [O15393-1]
+DR   RefSeq; XP_011528033.1; XM_011529731.2.
+DR   SMR; O15393; -.
+DR   BioGRID; 112968; 6.
+DR   IntAct; O15393; 61.
+DR   STRING; 9606.ENSP00000381588; -.
+DR   BindingDB; O15393; -.
+DR   ChEMBL; CHEMBL1795140; -.
+DR   GuidetoPHARMACOLOGY; 2421; -.
+DR   MEROPS; S01.247; -.
+DR   GlyConnect; 1848; 4 N-Linked glycans (2 sites).
+DR   GlyGen; O15393; 2 sites.
+DR   iPTMnet; O15393; -.
+DR   PhosphoSitePlus; O15393; -.
+DR   SwissPalm; O15393; -.
+DR   BioMuta; TMPRSS2; -.
+DR   jPOST; O15393; -.
+DR   MassIVE; O15393; -.
+DR   MaxQB; O15393; -.
+DR   PaxDb; O15393; -.
+DR   PeptideAtlas; O15393; -.
+DR   PRIDE; O15393; -.
+DR   ProteomicsDB; 31938; -.
+DR   ProteomicsDB; 48634; -. [O15393-1]
+DR   ABCD; O15393; 1 sequenced antibody.
+DR   Antibodypedia; 2685; 293 antibodies.
+DR   DNASU; 7113; -.
+DR   Ensembl; ENST00000332149; ENSP00000330330; ENSG00000184012. [O15393-1]
+DR   Ensembl; ENST00000398585; ENSP00000381588; ENSG00000184012. [O15393-2]
+DR   Ensembl; ENST00000458356; ENSP00000391216; ENSG00000184012. [O15393-1]
+DR   GeneID; 7113; -.
+DR   KEGG; hsa:7113; -.
+DR   UCSC; uc002yzj.4; human. [O15393-1]
+DR   CTD; 7113; -.
+DR   DisGeNET; 7113; -.
+DR   EuPathDB; HostDB:ENSG00000184012.11; -.
+DR   GeneCards; TMPRSS2; -.
+DR   HGNC; HGNC:11876; TMPRSS2.
+DR   HPA; ENSG00000184012; Tissue enhanced (intestine, pancreas, prostate).
+DR   MIM; 602060; gene.
+DR   neXtProt; NX_O15393; -.
+DR   OpenTargets; ENSG00000184012; -.
+DR   PharmGKB; PA36577; -.
+DR   eggNOG; KOG3627; Eukaryota.
+DR   GeneTree; ENSGT00940000155207; -.
+DR   InParanoid; O15393; -.
+DR   KO; K09633; -.
+DR   OMA; YQPESLY; -.
+DR   OrthoDB; 1314811at2759; -.
+DR   PhylomeDB; O15393; -.
+DR   TreeFam; TF351678; -.
+DR   PathwayCommons; O15393; -.
+DR   SIGNOR; O15393; -.
+DR   BioGRID-ORCS; 7113; 2 hits in 872 CRISPR screens.
+DR   ChiTaRS; TMPRSS2; human.
+DR   GeneWiki; TMPRSS2; -.
+DR   GenomeRNAi; 7113; -.
+DR   Pharos; O15393; Tchem.
+DR   PRO; PR:O15393; -.
+DR   Proteomes; UP000005640; Chromosome 21.
+DR   RNAct; O15393; protein.
+DR   Bgee; ENSG00000184012; Expressed in prostate gland and 166 other tissues.
+DR   ExpressionAtlas; O15393; baseline and differential.
+DR   Genevisible; O15393; HS.
+DR   GO; GO:0070062; C:extracellular exosome; HDA:UniProtKB.
+DR   GO; GO:0005887; C:integral component of plasma membrane; TAS:ProtInc.
+DR   GO; GO:0005886; C:plasma membrane; IDA:UniProtKB.
+DR   GO; GO:0005044; F:scavenger receptor activity; IEA:InterPro.
+DR   GO; GO:0004252; F:serine-type endopeptidase activity; IEA:InterPro.
+DR   GO; GO:0008236; F:serine-type peptidase activity; TAS:ProtInc.
+DR   GO; GO:0046598; P:positive regulation of viral entry into host cell; IDA:UniProtKB.
+DR   GO; GO:0016540; P:protein autoprocessing; IMP:UniProtKB.
+DR   GO; GO:0006508; P:proteolysis; IDA:UniProtKB.
+DR   CDD; cd00112; LDLa; 1.
+DR   CDD; cd00190; Tryp_SPc; 1.
+DR   Gene3D; 2.40.10.10; -; 1.
+DR   Gene3D; 3.10.250.10; -; 1.
+DR   Gene3D; 4.10.400.10; -; 1.
+DR   InterPro; IPR036055; LDL_receptor-like_sf.
+DR   InterPro; IPR023415; LDLR_class-A_CS.
+DR   InterPro; IPR002172; LDrepeatLR_classA_rpt.
+DR   InterPro; IPR009003; Peptidase_S1_PA.
+DR   InterPro; IPR043504; Peptidase_S1_PA_chymotrypsin.
+DR   InterPro; IPR001314; Peptidase_S1A.
+DR   InterPro; IPR001190; SRCR.
+DR   InterPro; IPR017448; SRCR-like_dom.
+DR   InterPro; IPR036772; SRCR-like_dom_sf.
+DR   InterPro; IPR001254; Trypsin_dom.
+DR   InterPro; IPR018114; TRYPSIN_HIS.
+DR   InterPro; IPR033116; TRYPSIN_SER.
+DR   Pfam; PF15494; SRCR_2; 1.
+DR   Pfam; PF00089; Trypsin; 1.
+DR   PRINTS; PR00722; CHYMOTRYPSIN.
+DR   SMART; SM00192; LDLa; 1.
+DR   SMART; SM00202; SR; 1.
+DR   SMART; SM00020; Tryp_SPc; 1.
+DR   SUPFAM; SSF50494; SSF50494; 1.
+DR   SUPFAM; SSF56487; SSF56487; 1.
+DR   SUPFAM; SSF57424; SSF57424; 1.
+DR   PROSITE; PS01209; LDLRA_1; 1.
+DR   PROSITE; PS50068; LDLRA_2; 1.
+DR   PROSITE; PS50287; SRCR_2; 1.
+DR   PROSITE; PS50240; TRYPSIN_DOM; 1.
+DR   PROSITE; PS00134; TRYPSIN_HIS; 1.
+DR   PROSITE; PS00135; TRYPSIN_SER; 1.
+PE   1: Evidence at protein level;
+KW   Alternative splicing; Autocatalytic cleavage; Cell membrane;
+KW   Disulfide bond; Glycoprotein; Hydrolase; Membrane; Polymorphism; Protease;
+KW   Reference proteome; Secreted; Serine protease; Signal-anchor;
+KW   Transmembrane; Transmembrane helix; Zymogen.
+FT   CHAIN           1..255
+FT                   /note="Transmembrane protease serine 2 non-catalytic chain"
+FT                   /id="PRO_0000027855"
+FT   CHAIN           256..492
+FT                   /note="Transmembrane protease serine 2 catalytic chain"
+FT                   /id="PRO_0000027856"
+FT   TOPO_DOM        1..84
+FT                   /note="Cytoplasmic"
+FT                   /evidence="ECO:0000255"
+FT   TRANSMEM        85..105
+FT                   /note="Helical; Signal-anchor for type II membrane protein"
+FT                   /evidence="ECO:0000255"
+FT   TOPO_DOM        106..492
+FT                   /note="Extracellular"
+FT                   /evidence="ECO:0000255"
+FT   DOMAIN          112..149
+FT                   /note="LDL-receptor class A"
+FT                   /evidence="ECO:0000255|PROSITE-ProRule:PRU00124"
+FT   DOMAIN          150..242
+FT                   /note="SRCR"
+FT                   /evidence="ECO:0000255|PROSITE-ProRule:PRU00196"
+FT   DOMAIN          256..489
+FT                   /note="Peptidase S1"
+FT                   /evidence="ECO:0000255|PROSITE-ProRule:PRU00274"
+FT   ACT_SITE        296
+FT                   /note="Charge relay system"
+FT                   /evidence="ECO:0000250"
+FT   ACT_SITE        345
+FT                   /note="Charge relay system"
+FT                   /evidence="ECO:0000250"
+FT   ACT_SITE        441
+FT                   /note="Charge relay system"
+FT   SITE            255..256
+FT                   /note="Cleavage"
+FT                   /evidence="ECO:0000269|PubMed:11245484"
+FT   CARBOHYD        213
+FT                   /note="N-linked (GlcNAc...) asparagine"
+FT                   /evidence="ECO:0000255"
+FT   CARBOHYD        249
+FT                   /note="N-linked (GlcNAc...) asparagine"
+FT                   /evidence="ECO:0000255"
+FT   DISULFID        113..126
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        120..139
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        133..148
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        172..231
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        185..241
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        244..365
+FT                   /note="Interchain (between non-catalytic and catalytic
+FT                   chains)"
+FT                   /evidence="ECO:0000255|PROSITE-ProRule:PRU00124,
+FT                   ECO:0000255|PROSITE-ProRule:PRU00196, ECO:0000255|PROSITE-
+FT                   ProRule:PRU00274"
+FT   DISULFID        281..297
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        410..426
+FT                   /evidence="ECO:0000250"
+FT   DISULFID        437..465
+FT                   /evidence="ECO:0000250"
+FT   VAR_SEQ         1
+FT                   /note="M -> MPPAPPGGESGCEERGAAGHIEHSRYLSLLDAVDNSKM (in
+FT                   isoform 2)"
+FT                   /evidence="ECO:0000303|PubMed:14702039"
+FT                   /id="VSP_045083"
+FT   VARIANT         160
+FT                   /note="V -> M (in dbSNP:rs12329760)"
+FT                   /evidence="ECO:0000269|PubMed:11414763,
+FT                   ECO:0000269|PubMed:17918732, ECO:0000269|PubMed:9325052"
+FT                   /id="VAR_027674"
+FT   VARIANT         254
+FT                   /note="S -> C"
+FT                   /evidence="ECO:0000269|PubMed:17918732"
+FT                   /id="VAR_038002"
+FT   VARIANT         329
+FT                   /note="E -> Q (in dbSNP:rs775137340)"
+FT                   /evidence="ECO:0000269|PubMed:17918732,
+FT                   ECO:0000269|PubMed:9325052"
+FT                   /id="VAR_038003"
+FT   VARIANT         449
+FT                   /note="K -> N (in dbSNP:rs1056602)"
+FT                   /id="VAR_011692"
+FT   VARIANT         491
+FT                   /note="D -> N (in dbSNP:rs779875214)"
+FT                   /evidence="ECO:0000269|PubMed:17918732"
+FT                   /id="VAR_038004"
+FT   MUTAGEN         255
+FT                   /note="R->Q: Loss of cleavage."
+FT                   /evidence="ECO:0000269|PubMed:11245484"
+FT   MUTAGEN         441
+FT                   /note="S->A: Loss of activity."
+FT                   /evidence="ECO:0000269|PubMed:11245484"
+FT   CONFLICT        26
+FT                   /note="Y -> H (in Ref. 4; BAF84502)"
+FT                   /evidence="ECO:0000305"
+FT   CONFLICT        62
+FT                   /note="N -> S (in Ref. 4; BAH12445)"
+FT                   /evidence="ECO:0000305"
+FT   CONFLICT        163
+FT                   /note="S -> P (in Ref. 4; BAF84502)"
+FT                   /evidence="ECO:0000305"
+FT   CONFLICT        242
+FT                   /note="I -> L (in Ref. 1; AAC51784)"
+FT                   /evidence="ECO:0000305"
+FT   CONFLICT        489..491
+FT                   /note="RAD -> KAN (in Ref. 1; AAC51784)"
+FT                   /evidence="ECO:0000305"
+SQ   SEQUENCE   492 AA;  53859 MW;  C05B5531C8A311C7 CRC64;
+     MALNSGSPPA IGPYYENHGY QPENPYPAQP TVVPTVYEVH PAQYYPSPVP QYAPRVLTQA
+     SNPVVCTQPK SPSGTVCTSK TKKALCITLT LGTFLVGAAL AAGLLWKFMG SKCSNSGIEC
+     DSSGTCINPS NWCDGVSHCP GGEDENRCVR LYGPNFILQV YSSQRKSWHP VCQDDWNENY
+     GRAACRDMGY KNNFYSSQGI VDDSGSTSFM KLNTSAGNVD IYKKLYHSDA CSSKAVVSLR
+     CIACGVNLNS SRQSRIVGGE SALPGAWPWQ VSLHVQNVHV CGGSIITPEW IVTAAHCVEK
+     PLNNPWHWTA FAGILRQSFM FYGAGYQVEK VISHPNYDSK TKNNDIALMK LQKPLTFNDL
+     VKPVCLPNPG MMLQPEQLCW ISGWGATEEK GKTSEVLNAA KVLLIETQRC NSRYVYDNLI
+     TPAMICAGFL QGNVDSCQGD SGGPLVTSKN NIWWLIGDTS WGSGCAKAYR PGVYGNVMVF
+     TDWIYRQMRA DG
+//
