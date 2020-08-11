@@ -1,9 +1,16 @@
 package uk.ac.ebi.uniprot.ot.converter;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.apache.commons.io.FileUtils;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
@@ -11,6 +18,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
@@ -23,16 +31,10 @@ import uk.ac.ebi.uniprot.ot.model.provenance.Literature;
 import uk.ac.ebi.uniprot.ot.validation.json.JsonSchemaValidator;
 import uk.ac.ebi.uniprot.ot.validation.json.JsonValidator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Transforms an evidence string source object into one or more {@link Base} instances.
@@ -43,19 +45,19 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
   // logger
   private static final Logger LOGGER = LoggerFactory.getLogger(UniProtDiseaseAssocCollator.class);
 
-  private static final String SCHEMA_ADDRESS =
+  protected static final String SCHEMA_ADDRESS =
       "https://raw.githubusercontent.com/opentargets/json_schema/"
           + CTTV_SCHEMA_VERSION
           + "/opentargets.json";
 
-  private final JsonValidator validator;
-  private final Schema jsonSchema;
-  private ObjectMapper objectMapper;
-  private ConversionReport conversionReport;
+  protected final JsonValidator validator;
+  protected final Schema jsonSchema;
+  protected ObjectMapper objectMapper;
+  protected ConversionReport conversionReport;
 
-  private BaseFactory baseFactory;
+  protected BaseFactory baseFactory;
 
-  private boolean validate;
+  protected boolean validate;
 
   @Inject
   public UniProtDiseaseAssocCollator(BaseFactory baseFactory) throws IOException {
@@ -179,13 +181,13 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
         .filter(DiseaseCommentStructured::hasDefinedDisease);
   }
 
-  private void recordResultsWithoutValidating(
+  protected void recordResultsWithoutValidating(
       Collection<Base> bases, List<? extends Base> basesSubset) {
     bases.addAll(basesSubset);
     this.conversionReport.getTotalItemsSucceeded().getAndAdd(basesSubset.size());
   }
 
-  private void recordValidResults(
+  protected void recordValidResults(
       Collection<Base> bases,
       UniProtEntry uniProtEntry,
       DiseaseCommentStructured d,
@@ -204,7 +206,7 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
             });
   }
 
-  private boolean recordValidResults(String accession, String disease, Base base) {
+  protected boolean recordValidResults(String accession, String disease, Base base) {
     boolean succeeded = false;
     String message = "Invalid literature evidence JSON for: ({}, {})";
     try {

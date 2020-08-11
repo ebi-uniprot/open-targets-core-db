@@ -102,7 +102,7 @@ public class DiseaseAssocProducerTest {
         new FFOmim2EfoMapper(DiseaseAssocProducer.class.getResource(EFO_MAPPINGS)));
     UniProtDiseaseAssocCollator sourceConverter = new UniProtDiseaseAssocCollator(baseFactory);
     DiseaseAssocProducer producer =
-        new DiseaseAssocProducer(entryIterator, outFile, sourceConverter);
+        new DiseaseAssocProducer(entryIterator, outFile, sourceConverter, null);
     producer.produce();
     assertThat(producer, is(not(nullValue())));
     assertThat(outFile.length(), is(greaterThan(0L)));
@@ -121,7 +121,7 @@ public class DiseaseAssocProducerTest {
         new SomaticDbSNPMapper(DiseaseAssocProducer.class.getResource(SOMATIC_MAPPINGS)));
     UniProtDiseaseAssocCollator sourceConverter = new UniProtDiseaseAssocCollator(baseFactory);
     DiseaseAssocProducer producer =
-        new DiseaseAssocProducer(entryIterator, outFile, sourceConverter);
+        new DiseaseAssocProducer(entryIterator, outFile, sourceConverter, null);
     producer.produce();
     assertThat(producer, is(not(nullValue())));
     assertThat(outFile.length(), is(greaterThan(0L)));

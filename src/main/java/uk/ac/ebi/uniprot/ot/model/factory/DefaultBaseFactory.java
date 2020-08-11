@@ -1,10 +1,16 @@
 package uk.ac.ebi.uniprot.ot.model.factory;
 
-import com.google.common.util.concurrent.AtomicDouble;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import uk.ac.ebi.kraken.interfaces.common.Value;
 import uk.ac.ebi.kraken.interfaces.uniprot.HasEvidences;
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
@@ -30,13 +36,9 @@ import uk.ac.ebi.uniprot.ot.model.provenance.LiteratureProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.provenance.ProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
+import com.google.common.util.concurrent.AtomicDouble;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Created 11/05/15
@@ -85,6 +87,7 @@ public class DefaultBaseFactory implements BaseFactory {
   private static final String PUBMED_EVIDENCE_TYPE = "PubMed";
   private static final String ECO_0000269 = "ECO:0000269";
   private static final String ECO_0000303 = "ECO:0000303";
+  public static final String UNIPROT_INFECTIOUS_LITERATURE = "uniprot_infection_literature";
   private final LiteratureCuratedRootFactory literatureCuratedRootFactory =
       new LiteratureCuratedRootFactory(this);
   private final GeneticsRootFactory geneticsRootFactory = new GeneticsRootFactory(this);

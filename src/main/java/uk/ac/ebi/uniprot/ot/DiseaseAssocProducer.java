@@ -13,14 +13,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
-import uk.ac.ebi.uniprot.ot.converter.UniProtDiseaseAssocCollator;
-import uk.ac.ebi.uniprot.ot.input.UniProtEvSource;
-import uk.ac.ebi.uniprot.ot.model.base.Base;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
+import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
+import uk.ac.ebi.kraken.parser.NewEntryIterator;
+import uk.ac.ebi.uniprot.ot.converter.UniProtDiseaseAssocCollator;
+import uk.ac.ebi.uniprot.ot.converter.UniProtInfectiousDiseaseAssocCollator;
+import uk.ac.ebi.uniprot.ot.input.UniProtEvSource;
+import uk.ac.ebi.uniprot.ot.model.base.Base;
 
 /**
  * Directs the evidence string generation, given the appropriate input source(s).
@@ -40,17 +42,20 @@ public class DiseaseAssocProducer {
   private int max;
   private AtomicInteger writeCount;
   private boolean verbose;
+  private UniProtInfectiousDiseaseAssocCollator infEvsCollater;
 
   @Inject
   public DiseaseAssocProducer(
       Iterator<UniProtEntry> entryIterator,
       @Named("outputFile") File outputFile,
-      UniProtDiseaseAssocCollator evStringCollator)
+      UniProtDiseaseAssocCollator evStringCollator,
+      UniProtInfectiousDiseaseAssocCollator infEvsCollater)
       throws IOException {
 
     this.outputFile = outputFile.toPath();
     this.entryIterator = entryIterator;
     this.evStringCollator = evStringCollator;
+    this.infEvsCollater = infEvsCollater;
     this.jsonCreator = new ObjectMapper();
     this.max = -1;
     this.writeCount = new AtomicInteger(0);
@@ -64,11 +69,25 @@ public class DiseaseAssocProducer {
       try (BufferedWriter writer = Files.newBufferedWriter(outputFile, Charset.defaultCharset())) {
 
         LOGGER.debug("Generating data dump");
-        while (entryIterator.hasNext() && (max == -1 || writeCount.get() < max)) {
-          UniProtEntry uniProtEntry = entryIterator.next();
-          UniProtEvSource evSource = createEvSource(uniProtEntry);
-          convertSourceAndWrite(writer, evSource);
+//        while (entryIterator.hasNext() && (max == -1 || writeCount.get() < max)) {
+//          try {
+//            UniProtEntry uniProtEntry = entryIterator.next();
+//
+//            UniProtEvSource evSource = createEvSource(uniProtEntry);
+//            convertSourceAndWrite(writer, evSource);
+//          } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//          }
+//        }
+        NewEntryIterator newEntryIterator = new NewEntryIterator();
+        newEntryIterator.setInput("src/test/resources/uniprot-covid-O15393.txt");
+        while (newEntryIterator.hasNext()) {
+            UniProtEntry next = newEntryIterator.next();
+            System.out.println("next: "+next);
+            UniProtEvSource evSource = createEvSource(next);
+            convertSourceAndWriteInf(writer, evSource);
         }
+
 
       } catch (IOException exception) {
         LOGGER.error("Error writing to output file, {}", outputFile.getFileName());
@@ -110,6 +129,25 @@ public class DiseaseAssocProducer {
       writer.append(jsonCreator.writeValueAsString(base));
     }
   }
+  
+  private void convertSourceAndWriteInf(BufferedWriter writer, UniProtEvSource evSource)
+	      throws IOException {
+	    // create evidence strings
+	    Collection<Base> bases = this.infEvsCollater.convert(evSource);
+
+	    // .. and write them
+	    for (Base base : bases) {
+	      if (this.verbose) {
+	        LOGGER.debug(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(base));
+	      }
+
+	      if (writeCount.getAndIncrement() != 0) {
+	        writer.append("\n");
+	      }
+
+	      writer.append(jsonCreator.writeValueAsString(base));
+	    }
+	  }
 
   @Inject
   public void setMax(@Named("max") int max) {

@@ -6,7 +6,7 @@
 	<artifactId>open-targets</artifactId>
 	<version>1.0.0</version>
 	<properties>
-		<japi.version>1.0.30</japi.version>
+		<japi.version>1.0.31</japi.version>
 		<jcommander.version>1.47</jcommander.version>
 		<guice.version>4.0</guice.version>
 		<slf4j.version>1.7.20</slf4j.version>
