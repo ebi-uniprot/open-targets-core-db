@@ -22,7 +22,6 @@ import uk.ac.ebi.uniprot.ot.model.LiteratureCuratedRoot;
 import uk.ac.ebi.uniprot.ot.model.bioentity.Disease;
 import uk.ac.ebi.uniprot.ot.model.bioentity.Target;
 import uk.ac.ebi.uniprot.ot.model.evidence.LinkOut;
-import uk.ac.ebi.uniprot.ot.model.evidence.association_score.AssScoreMethod;
 import uk.ac.ebi.uniprot.ot.model.evidence.association_score.ProbabilityAssScore;
 import uk.ac.ebi.uniprot.ot.model.provenance.DatabaseProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.provenance.Literature;
@@ -280,6 +279,7 @@ public class DefaultBaseFactory implements BaseFactory {
       disease.setName(structuredDisease.getDisease().getDiseaseId().getValue());
     }
     disease.setId(efo);
+    disease.setAcronym(structuredDisease.getDisease().getAcronym().getValue());
 
     return disease;
   }
@@ -365,10 +365,6 @@ public class DefaultBaseFactory implements BaseFactory {
     }
 
     ProbabilityAssScore score = new ProbabilityAssScore();
-    AssScoreMethod scoreMethod = new AssScoreMethod();
-    scoreMethod.setDescription(SCORE_METHOD_DESCRIPTION);
-    scoreMethod.setUrl(ASSOCIATIONS_SCORE_METHOD_DESCRIPTION_URL);
-    score.setMethod(scoreMethod);
     score.setValue(assocScore.get());
     return score;
   }

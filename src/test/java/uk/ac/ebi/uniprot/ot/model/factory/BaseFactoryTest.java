@@ -1,25 +1,25 @@
 package uk.ac.ebi.uniprot.ot.model.factory;
 
-import static java.util.Collections.singletonList;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-
 import uk.ac.ebi.kraken.interfaces.uniprot.EvidencedValue;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseNote;
 import uk.ac.ebi.kraken.model.uniprot.EvidencedValueImpl;
 import uk.ac.ebi.uniprot.ot.MockitoExtension;
 import uk.ac.ebi.uniprot.ot.model.evidence.association_score.ProbabilityAssScore;
+
+import java.util.List;
+
+import static java.util.Collections.singletonList;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.ASSOCIATION_SCORE_DEFINITE;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.ASSOCIATION_SCORE_INDEFINITE;
 
 /**
  * Created 16/06/17
@@ -49,7 +49,6 @@ class BaseFactoryTest {
     ProbabilityAssScore associationScore = baseFactory.createAssociationScore(mockDiseaseComment);
 
     assertThat(associationScore.getValue(), is(ASSOCIATION_SCORE_DEFINITE));
-    associationScoreDefaultFieldsAreValid(associationScore);
   }
 
   @Test
@@ -64,7 +63,6 @@ class BaseFactoryTest {
     ProbabilityAssScore associationScore = baseFactory.createAssociationScore(mockDiseaseComment);
 
     assertThat(associationScore.getValue(), is(ASSOCIATION_SCORE_INDEFINITE));
-    associationScoreDefaultFieldsAreValid(associationScore);
   }
 
   @Test
@@ -72,11 +70,5 @@ class BaseFactoryTest {
     ProbabilityAssScore associationScore = baseFactory.createAssociationScore(null);
 
     assertThat(associationScore, is(notNullValue()));
-    associationScoreDefaultFieldsAreValid(associationScore);
-  }
-
-  private void associationScoreDefaultFieldsAreValid(ProbabilityAssScore score) {
-    assertThat(score.getMethod().getDescription(), is(SCORE_METHOD_DESCRIPTION));
-    assertThat(score.getMethod().getUrl(), is(ASSOCIATIONS_SCORE_METHOD_DESCRIPTION_URL));
   }
 }
