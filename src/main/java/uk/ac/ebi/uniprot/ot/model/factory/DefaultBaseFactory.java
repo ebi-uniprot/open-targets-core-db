@@ -60,20 +60,20 @@ public class DefaultBaseFactory implements BaseFactory {
   static final String SCORE_METHOD_DESCRIPTION = "Curator inference (either 1.0 or 0.5)";
   static final String ASSOCIATIONS_SCORE_METHOD_DESCRIPTION_URL =
       "https://github.com/CTTV/association_score_methods/blob/master/CTTV011_UniProt/description.md";
-  private static final String IDENTIFIERS_URI = "http://identifiers.org";
-  private static final String UNIPROT_URI = "http://www.uniprot.org/uniprot/%s";
-  private static final String EUROPEPMC_URI = "http://europepmc.org";
-  private static final String PUBMED_URI_FORMAT = EUROPEPMC_URI + "/abstract/MED/%s";
-  private static final String ECO_URI_FORMAT = "http://purl.obolibrary.org/obo/%s";
+  protected static final String IDENTIFIERS_URI = "http://identifiers.org";
+  protected static final String UNIPROT_URI = "http://www.uniprot.org/uniprot/%s";
+  protected static final String EUROPEPMC_URI = "http://europepmc.org";
+  protected static final String PUBMED_URI_FORMAT = EUROPEPMC_URI + "/abstract/MED/%s";
+  protected static final String ECO_URI_FORMAT = "http://purl.obolibrary.org/obo/%s";
   static final String CTTV_FAVOURED_CURATED_EVIDENCE_ECO =
       String.format(ECO_URI_FORMAT, "ECO_0000205");
   public static final String SO_SUBSTITUTION_URI = String.format(ECO_URI_FORMAT, "SO_0001583");
   public static final String SO_MISSING_URI = String.format(ECO_URI_FORMAT, "SO_0001822");
   public static final String SO_SEQ_ALTERATION_URI = String.format(ECO_URI_FORMAT, "SO_0001059");
-  private static final String UNIPROT_URI_FORMAT = IDENTIFIERS_URI + "/uniprot/%s";
-  private static final String UNIPROT_DISEASE_URI_FORMAT = UNIPROT_URI + "#pathology_and_biotech";
-  private static final String ACTIVITY_UP_DOWN = "http://identifiers.org/cttv.activity/up_or_down";
-  private static final String PROTEIN_TARGET =
+  protected static final String UNIPROT_URI_FORMAT = IDENTIFIERS_URI + "/uniprot/%s";
+  protected static final String UNIPROT_DISEASE_URI_FORMAT = UNIPROT_URI + "#pathology_and_biotech";
+  protected static final String ACTIVITY_UP_DOWN = "http://identifiers.org/cttv.activity/up_or_down";
+  protected static final String PROTEIN_TARGET =
       "http://identifiers.org/cttv.target/protein_evidence";
   private static final List<String> INDEFINITE_DISEASE_NOTE_ASSOCIATIONS =
       asList(
@@ -84,18 +84,18 @@ public class DefaultBaseFactory implements BaseFactory {
           "The gene represented in this entry may act as a disease modifier",
           "The gene represented in this entry may be involved in disease pathogenesis",
           "The protein represented in this entry may be involved in disease pathogenesis");
-  private static final String PUBMED_EVIDENCE_TYPE = "PubMed";
-  private static final String ECO_0000269 = "ECO:0000269";
-  private static final String ECO_0000303 = "ECO:0000303";
+  protected static final String PUBMED_EVIDENCE_TYPE = "PubMed";
+  protected static final String ECO_0000269 = "ECO:0000269";
+  protected static final String ECO_0000303 = "ECO:0000303";
   public static final String UNIPROT_INFECTIOUS_LITERATURE = "uniprot_infection_literature";
   private final LiteratureCuratedRootFactory literatureCuratedRootFactory =
       new LiteratureCuratedRootFactory(this);
   private final GeneticsRootFactory geneticsRootFactory = new GeneticsRootFactory(this);
 
   private Omim2EfoMapper omim2EfoMapper;
-  private String uniProtReleaseVersion;
+  protected String uniProtReleaseVersion;
 
-  private SomaticDbSNPMapper somaticDbSNPCache;
+  protected SomaticDbSNPMapper somaticDbSNPCache;
 
   @Inject
   public void setOmim2EfoMapper(Omim2EfoMapper mapper) {
@@ -228,7 +228,7 @@ public class DefaultBaseFactory implements BaseFactory {
     return DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(date.toInstant());
   }
 
-  private static String createEcoUrl(String ecoCode) {
+  protected static String createEcoUrl(String ecoCode) {
     return String.format(ECO_URI_FORMAT, ecoCode.replace(":", "_"));
   }
 
@@ -376,7 +376,7 @@ public class DefaultBaseFactory implements BaseFactory {
     return score;
   }
 
-  private boolean isSomatic(UniProtEntry uniProtEntry, String efo, VariantLineInfo vli) {
+  protected boolean isSomatic(UniProtEntry uniProtEntry, String efo, VariantLineInfo vli) {
     String accession = uniProtEntry.getPrimaryUniProtAccession().getValue();
     List<String> dbSNPs = vli.getDbSNPs();
 

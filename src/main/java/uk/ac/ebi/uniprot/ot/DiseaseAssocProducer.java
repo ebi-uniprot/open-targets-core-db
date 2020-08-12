@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,9 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
+import uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentText;
+import uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType;
+import uk.ac.ebi.kraken.interfaces.uniprot.comments.TextOnlyComment;
 import uk.ac.ebi.kraken.parser.NewEntryIterator;
 import uk.ac.ebi.uniprot.ot.converter.UniProtDiseaseAssocCollator;
 import uk.ac.ebi.uniprot.ot.converter.UniProtInfectiousDiseaseAssocCollator;
@@ -80,12 +85,11 @@ public class DiseaseAssocProducer {
 //          }
 //        }
         NewEntryIterator newEntryIterator = new NewEntryIterator();
-        newEntryIterator.setInput("src/test/resources/uniprot-covid-O15393.txt");
+        newEntryIterator.setInput("src/test/resources/uniprot-covid.txt");
         while (newEntryIterator.hasNext()) {
             UniProtEntry next = newEntryIterator.next();
-            System.out.println("next: "+next);
             UniProtEvSource evSource = createEvSource(next);
-            convertSourceAndWriteInf(writer, evSource);
+            convertSourceAndWriteInfectiousDisease(writer, evSource);
         }
 
 
@@ -130,23 +134,23 @@ public class DiseaseAssocProducer {
     }
   }
   
-  private void convertSourceAndWriteInf(BufferedWriter writer, UniProtEvSource evSource)
+  private void convertSourceAndWriteInfectiousDisease(BufferedWriter writer, UniProtEvSource evSource)
 	      throws IOException {
 	    // create evidence strings
 	    Collection<Base> bases = this.infEvsCollater.convert(evSource);
 
 	    // .. and write them
-	    for (Base base : bases) {
-	      if (this.verbose) {
-	        LOGGER.debug(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(base));
-	      }
+		for (Base base : bases) {
+			if (this.verbose) {
+				LOGGER.debug(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(base));
+			}
 
-	      if (writeCount.getAndIncrement() != 0) {
-	        writer.append("\n");
-	      }
+			if (writeCount.getAndIncrement() != 0) {
+				writer.append("\n");
+			}
 
-	      writer.append(jsonCreator.writeValueAsString(base));
-	    }
+			writer.append(jsonCreator.writeValueAsString(base));
+		}
 	  }
 
   @Inject

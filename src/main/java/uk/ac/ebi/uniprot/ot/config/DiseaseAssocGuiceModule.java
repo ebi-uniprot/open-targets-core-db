@@ -1,6 +1,10 @@
 package uk.ac.ebi.uniprot.ot.config;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,16 +79,22 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
 	}
 
 	@Provides
-	Map<String, List<InfectiousDiseaseEFO>> provideAccession2EfoMapper() {
-		List<InfectiousDiseaseEFO> list = new ArrayList<InfectiousDiseaseEFO>();
-		InfectiousDiseaseEFO efo = new InfectiousDiseaseEFO();
-		efo.setText(
-				"<text evidence=\"13 14 15 16 17 18 21\">(Microbial infection) Facilitates human coronaviruses SARS-CoV and SARS-CoV-2 infections via two independent mechanisms, proteolytic cleavage of ACE2 receptor which promotes viral uptake, and cleavage of coronavirus spike glycoproteins which activates the glycoprotein for host cell entry (PubMed:24227843, PubMed:32142651). Proteolytically cleaves and activates the spike glycoproteins of human coronavirus 229E (HCoV-229E) and human coronavirus EMC (HCoV-EMC) and the fusion glycoproteins F0 of Sendai virus (SeV), human metapneumovirus (HMPV), human parainfluenza 1, 2, 3, 4a and 4b viruses (HPIV). Essential for spread and pathogenesis of influenza A virus (strains H1N1, H3N2 and H7N9); involved in proteolytic cleavage and activation of hemagglutinin (HA) protein which is essential for viral infectivity.</text>");
-		efo.setId("http://purl.obolibrary.org/obo/MONDO_0100096");
-		efo.setName("COVID-19");
-		list.add(efo);
+	Map<String, List<InfectiousDiseaseEFO>> provideAccession2EfoMapper() throws IOException {
+		File file = new File("src/bin/infectiousDiseaseMapping");
+		FileReader fr = new FileReader(file); // reads the file
+		BufferedReader br = new BufferedReader(fr);
+		String line;
 		Map<String, List<InfectiousDiseaseEFO>> map = new HashMap<String, List<InfectiousDiseaseEFO>>();
-		map.put("O15393", list);
+		while ((line = br.readLine()) != null) {
+			List<InfectiousDiseaseEFO> list = new ArrayList<InfectiousDiseaseEFO>();
+			String[] mapping = line.split("\\|");
+			InfectiousDiseaseEFO efo = new InfectiousDiseaseEFO();
+			efo.setText(mapping[1]);
+			efo.setId(mapping[2]);
+			efo.setName(mapping[3]);
+			list.add(efo);
+			map.put(mapping[0], list);
+		}
 		return map;
 	}
 

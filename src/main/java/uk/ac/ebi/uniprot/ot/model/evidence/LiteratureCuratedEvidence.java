@@ -15,6 +15,7 @@ public class LiteratureCuratedEvidence extends EvidenceBase {
   @JsonProperty private List<String> evidence_codes;
   @JsonProperty private List<Mutation> known_mutations;
   @JsonProperty private List<LinkOut> urls;
+  @JsonProperty private String function_description;
 
   public List<String> getEvidence_codes() {
     return evidence_codes;
@@ -39,4 +40,12 @@ public class LiteratureCuratedEvidence extends EvidenceBase {
   public void setUrls(List<LinkOut> urls) {
     this.urls = urls;
   }
+
+public String getFunction_description() {
+	return function_description;
+}
+
+public void setFunction_description(String function_description) {
+	this.function_description = function_description;
+}
 }

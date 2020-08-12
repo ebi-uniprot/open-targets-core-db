@@ -21,8 +21,8 @@ import uk.ac.ebi.uniprot.ot.model.provenance.ProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
 
 class LiteratureCuratedRootFactory {
-  private static final String SOMATIC = "somatic";
-  private static final String SOMATIC_MUTATION = "somatic_mutation";
+  protected static final String SOMATIC = "somatic";
+  protected static final String SOMATIC_MUTATION = "somatic_mutation";
   private final DefaultBaseFactory baseFactory;
 
   LiteratureCuratedRootFactory(DefaultBaseFactory baseFactory) {
@@ -93,7 +93,7 @@ class LiteratureCuratedRootFactory {
     return uaf;
   }
 
-  private LiteratureCuratedEvidence createLitEvidence(
+  protected LiteratureCuratedEvidence createLitEvidence(
       UniProtEntry uniProtEntry,
       DiseaseCommentStructured structuredDisease,
       List<EvidenceId> evidenceIds,

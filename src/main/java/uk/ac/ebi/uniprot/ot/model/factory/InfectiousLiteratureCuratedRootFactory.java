@@ -4,7 +4,6 @@ import static java.util.Collections.singletonList;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.accession;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.createDefaultECOsSet;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.createLinkOut;
-import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.createUniProtDiseaseUrl;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.createUniProtUrl;
 import static uk.ac.ebi.uniprot.ot.model.factory.GeneticsRootFactory.SNP_SINGLE;
 import static uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo.createDbSnpUrls;
@@ -32,8 +31,7 @@ import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
 
 class InfectiousLiteratureCuratedRootFactory extends LiteratureCuratedRootFactory {
 	private static final String INFECTION_LITERATURE = "infection_literature";
-	private static final String SOMATIC = "somatic";
-	private static final String SOMATIC_MUTATION = "somatic_mutation";
+	private static final String COVID_DISEASE_URI_FORMAT = "https://covid-19.uniprot.org/uniprotkb/%s" + "#Function";
 	private final InfectiousDiseaseBaseFactory baseFactory;
 
 	InfectiousLiteratureCuratedRootFactory(InfectiousDiseaseBaseFactory baseFactory) {
@@ -79,19 +77,15 @@ class InfectiousLiteratureCuratedRootFactory extends LiteratureCuratedRootFactor
 		lcr.setDisease(baseFactory.createDisease(disease, efoMapping));
 		lcr.setEvidence(createLitEvidence(uniProtEntry, disease, pubmedEvidenceIds));
 
-		lcr.setLiterature(baseFactory
-				.createLiteratureProvenanceType(new HashSet<>(baseFactory.extractPubMeds(pubmedEvidenceIds))));
-
 		return lcr;
 	}
 
 	private UniqueAssociationFields createLiteratureUniqueAssociationFields(UniProtEntry uniProtEntry,
 			InfectiousDisease disease, InfectiousDiseaseEFO efo) {
 		UniqueAssociationFields uaf = new UniqueAssociationFields();
-		uaf.setUniprot_release(baseFactory.getUniProtReleaseVersion());
+		// uniprot release not required for infectious disease
+		// uaf.setUniprot_release(baseFactory.getUniProtReleaseVersion());
 		uaf.setDisease_uri(efo.getId());
-		// TODO
-//		uaf.setDisease_acronym(structuredDisease.getDisease().getAcronym().getValue());
 		uaf.setTarget(createUniProtUrl(accession(uniProtEntry)));
 		return uaf;
 	}
@@ -143,7 +137,11 @@ class InfectiousLiteratureCuratedRootFactory extends LiteratureCuratedRootFactor
 		return lce;
 	}
 
-	private LiteratureCuratedEvidence createLitEvidence(UniProtEntry uniProtEntry, InfectiousDisease structuredDisease,
+	static String createUniProtDiseaseUrl(UniProtEntry uniProtEntry) {
+		return String.format(COVID_DISEASE_URI_FORMAT, accession(uniProtEntry));
+	}
+
+	private LiteratureCuratedEvidence createLitEvidence(UniProtEntry uniProtEntry, InfectiousDisease disease,
 			Collection<EvidenceId> evidenceIds) {
 		LiteratureCuratedEvidence lce = new LiteratureCuratedEvidence();
 
@@ -157,6 +155,8 @@ class InfectiousLiteratureCuratedRootFactory extends LiteratureCuratedRootFactor
 
 		baseFactory.extractEcoAndPubMeds(evidenceIds, ecos, pubmeds);
 
+		lce.setFunction_description(disease.getComment());
+
 		lce.setEvidenceCodes(new ArrayList<>(baseFactory.createEcoUrls(ecos)));
 
 		// literature
@@ -169,7 +169,7 @@ class InfectiousLiteratureCuratedRootFactory extends LiteratureCuratedRootFactor
 		lce.setIs_associated(true);
 
 		// association score
-		lce.setResource_score(baseFactory.createAssociationScore(structuredDisease));
+		lce.setResource_score(baseFactory.createAssociationScore(disease));
 
 		// date asserted
 		lce.setDate_asserted(DefaultBaseFactory.dateString(uniProtEntry.getEntryAudit().getLastAnnotationUpdateDate()));
