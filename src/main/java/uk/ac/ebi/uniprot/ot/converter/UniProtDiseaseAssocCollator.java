@@ -91,7 +91,8 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
       Set<Literature> litRefs = new HashSet<>(litRoot.getLiterature().getReferences());
       for (LiteratureCuratedRoot somaticLitRoot : somaticLit) {
         Set<Literature> somaticLitRefs =
-            new HashSet<>(somaticLitRoot.getLiterature().getReferences());
+            new HashSet<>(
+                somaticLitRoot.getEvidence().getProvenance_type().getLiterature().getReferences());
         if (somaticLitRefs.equals(litRefs)) {
           obsoleteLitRoots.add(litRoot);
         }
@@ -127,26 +128,34 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
     Collection<Base> bases = new ArrayList<>();
     UniProtEntry uniProtEntry = source.getEvidenceSource();
 
-    // iterate through diseases of entry and create evidence strings for each
-    getStructuredDiseasesStream(uniProtEntry)
-        .forEach(
-            disease -> {
-              // create the disease association pojos
-              List<LiteratureCuratedRoot> litRoots =
-                  this.baseFactory.createLiteratureCuratedRoot(uniProtEntry, disease);
-              List<GeneticsRoot> genRoots =
-                  this.baseFactory.createGeneticsRoots(uniProtEntry, disease);
+    try {
 
-              removeDuplicates(litRoots, genRoots);
+      // iterate through diseases of entry and create evidence strings for each
+      getStructuredDiseasesStream(uniProtEntry)
+          .forEach(
+              disease -> {
+                // create the disease association pojos
+                List<LiteratureCuratedRoot> litRoots =
+                    this.baseFactory.createLiteratureCuratedRoot(uniProtEntry, disease);
+                List<GeneticsRoot> genRoots =
+                    this.baseFactory.createGeneticsRoots(uniProtEntry, disease);
 
-              if (validate) {
-                recordValidResults(bases, uniProtEntry, disease, litRoots);
-                recordValidResults(bases, uniProtEntry, disease, genRoots);
-              } else {
-                recordResultsWithoutValidating(bases, litRoots);
-                recordResultsWithoutValidating(bases, genRoots);
-              }
-            });
+                removeDuplicates(litRoots, genRoots);
+
+                if (validate) {
+                  recordValidResults(bases, uniProtEntry, disease, litRoots);
+                  recordValidResults(bases, uniProtEntry, disease, genRoots);
+                } else {
+                  recordResultsWithoutValidating(bases, litRoots);
+                  recordResultsWithoutValidating(bases, genRoots);
+                }
+              });
+
+    } catch (Exception e) {
+      LOGGER.error(
+          "Could not process entry: " + uniProtEntry.getPrimaryUniProtAccession().getValue());
+      throw e;
+    }
 
     return bases;
   }

@@ -13,6 +13,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.name.Names;
+
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.uniprot.dataservice.client.Client;
 import uk.ac.ebi.uniprot.dataservice.client.ServiceFactory;
@@ -26,10 +30,6 @@ import uk.ac.ebi.uniprot.ot.mapper.SomaticDbSNPMapper;
 import uk.ac.ebi.uniprot.ot.model.InfectiousDiseaseEFO;
 import uk.ac.ebi.uniprot.ot.model.factory.BaseFactory;
 import uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.name.Names;
 
 /**
  * Configuration bindings for generating disease associations.
@@ -68,6 +68,7 @@ public class DiseaseAssocGuiceModule extends AbstractModule {
       throws ServiceException {
     // return uniProtService.getEntries(UniProtQueryBuilder.accession("O14672"));
     return uniProtService.getEntries(UniProtQueryBuilder.swissprot());
+    //    return uniProtService.getEntries(UniProtQueryBuilder.accession("Q02548"));
   }
 
   @Provides

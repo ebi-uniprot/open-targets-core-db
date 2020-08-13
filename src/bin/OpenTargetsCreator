@@ -2,6 +2,7 @@
 ##     Program options:
 ##     -all (optional) => use this the first time you run the script, or for each new data-release. It will fetch
 ##                        OMIM to EFO mappings, and build the JAR file used to create the data-file to submit to open-targets.
+##     -jar (optional) => use this to recreate the JAR file, but not fetch OMIM to EFO mappings, which already exists on the file-system.
 ##     -version (optional) => specifies the UniProt version to appear in the data-file generated. Without
 ##                            this argument, the version is obtained from the headers provided by https:www.uniprot.org.
 
@@ -25,7 +26,12 @@ key="$1"
 
 case $key in
     -all)
-    CREATE_JAR_AND_MAPPINGS="YES"
+    CREATE_JAR="YES"
+    CREATE_MAPPINGS="YES"
+    shift # past argument
+    ;;
+    -jar)
+    CREATE_JAR="YES"
     shift # past argument
     ;;
     -version)
@@ -48,14 +54,15 @@ omimEfoMappingsFile="omim2efo.mappings"
 infectiousDiseaseMappingsFile="infectious_disease.mapping"
 uniprotCovidFile="uniprot_covid.txt"
 
-if [ ! -z "$CREATE_JAR_AND_MAPPINGS" ]; then
+if [ ! -z "$CREATE_JAR" ]; then
     # build the jar
     echo "Creating the Open-Targets JAR"
     current_dir=$(pwd)
     cd ../..
     mvn clean package -DskipTests
     cd $current_dir
-
+fi
+if [ ! -z "$CREATE_MAPPINGS" ]; then
     # get the OMIM/EFO mappings
     echo "Fetching latest OMIM -> EFO mappings (see $omimEfoMappingsFile)"
     ./OpenTargetsFetchOmimEfoMappings 50 omim2efo > $omimEfoMappingsFile
