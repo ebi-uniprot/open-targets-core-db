@@ -71,7 +71,8 @@ public class DefaultBaseFactory implements BaseFactory {
   public static final String SO_SEQ_ALTERATION_URI = String.format(ECO_URI_FORMAT, "SO_0001059");
   protected static final String UNIPROT_URI_FORMAT = IDENTIFIERS_URI + "/uniprot/%s";
   protected static final String UNIPROT_DISEASE_URI_FORMAT = UNIPROT_URI + "#pathology_and_biotech";
-  protected static final String ACTIVITY_UP_DOWN = "http://identifiers.org/cttv.activity/up_or_down";
+  protected static final String ACTIVITY_UP_DOWN =
+      "http://identifiers.org/cttv.activity/up_or_down";
   protected static final String PROTEIN_TARGET =
       "http://identifiers.org/cttv.target/protein_evidence";
   private static final List<String> INDEFINITE_DISEASE_NOTE_ASSOCIATIONS =

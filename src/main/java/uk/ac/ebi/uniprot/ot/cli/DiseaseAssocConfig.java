@@ -63,6 +63,18 @@ public class DiseaseAssocConfig {
       description = "Print JSON also to standard output")
   private boolean verbose;
 
+  @Parameter(
+      names = "-idm",
+      required = true,
+      description = "Path to the file containing microbial infections disease mapping")
+  private String idmFile;
+
+  @Parameter(
+      names = "-ucf",
+      required = true,
+      description = "Path to the file containing microbial uniprot covid txt file")
+  private String ucfFile;
+
   public String getUniProtReleaseVersion() {
     return uniProtReleaseVersion;
   }
@@ -142,5 +154,21 @@ public class DiseaseAssocConfig {
     } else {
       throw new IllegalArgumentException("Invalid arguments supplied to DiseaseAssocConfig");
     }
+  }
+
+  public String getIdmFile() {
+    return idmFile;
+  }
+
+  public void setIdmFile(String idmFile) {
+    this.idmFile = idmFile;
+  }
+
+  public String getUcfFile() {
+    return ucfFile;
+  }
+
+  public void setUcfFile(String ucfFile) {
+    this.ucfFile = ucfFile;
   }
 }

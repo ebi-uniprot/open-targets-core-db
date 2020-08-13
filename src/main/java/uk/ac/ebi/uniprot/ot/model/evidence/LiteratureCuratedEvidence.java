@@ -41,11 +41,11 @@ public class LiteratureCuratedEvidence extends EvidenceBase {
     this.urls = urls;
   }
 
-public String getFunction_description() {
-	return function_description;
-}
+  public String getFunction_description() {
+    return function_description;
+  }
 
-public void setFunction_description(String function_description) {
-	this.function_description = function_description;
-}
+  public void setFunction_description(String function_description) {
+    this.function_description = function_description;
+  }
 }

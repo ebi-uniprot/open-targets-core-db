@@ -45,6 +45,8 @@ done
 
 ## ------------ SET UP NECESSARY VARIABLES / FILES ------------
 omimEfoMappingsFile="omim2efo.mappings"
+infectiousDiseaseMappingsFile="infectious_disease.mapping"
+uniprotCovidFile="uniprot_covid.txt"
 
 if [ ! -z "$CREATE_JAR_AND_MAPPINGS" ]; then
     # build the jar
@@ -82,7 +84,7 @@ echo "Creating Open-Targets JSON data ..."
 timeStamp=$(date "+%N")
 logFile="open-targets-$timeStamp.log"
 jsonOutputFile="uniprot-valid.json"
-command="./OpenTargetsJSONGenerator -o $jsonOutputFile -efo $omimEfoMappingsFile -version $version -validate -somaticDbSNP uniprot_somatic_census.txt"
+command="./OpenTargetsJSONGenerator -o $jsonOutputFile -efo $omimEfoMappingsFile -version $version -validate -somaticDbSNP uniprot_somatic_census.txt -idm $infectiousDiseaseMappingsFile -ucf $uniprotCovidFile"
 echo "Generating evidence strings:"
 echo "   command: $command"
 $command > $logFile 2>&1
