@@ -1,13 +1,5 @@
 package uk.ac.ebi.uniprot.ot.model.factory;
 
-import static java.util.Collections.singletonList;
-import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
-import static uk.ac.ebi.uniprot.ot.model.factory.GeneticsRootFactory.SNP_SINGLE;
-import static uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
 import uk.ac.ebi.kraken.interfaces.uniprot.evidences.EvidenceId;
@@ -19,6 +11,14 @@ import uk.ac.ebi.uniprot.ot.model.evidence.LiteratureCuratedEvidence;
 import uk.ac.ebi.uniprot.ot.model.evidence.Mutation;
 import uk.ac.ebi.uniprot.ot.model.provenance.ProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.singletonList;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
+import static uk.ac.ebi.uniprot.ot.model.factory.GeneticsRootFactory.SNP_SINGLE;
+import static uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo.*;
 
 class LiteratureCuratedRootFactory {
   protected static final String SOMATIC = "somatic";
@@ -51,9 +51,6 @@ class LiteratureCuratedRootFactory {
     lcr.setType(SOMATIC_MUTATION);
     lcr.setDisease(baseFactory.createDisease(disease, efo));
     lcr.setTarget(baseFactory.createTarget(uniProtEntry));
-    lcr.setLiterature(
-        baseFactory.createLiteratureProvenanceType(
-            new HashSet<>(baseFactory.extractPubMeds(pubmedEvidenceIds))));
 
     lcr.setEvidence(createLitEvidence(uniProtEntry, disease, pubmedEvidenceIds, vli));
 
@@ -86,7 +83,6 @@ class LiteratureCuratedRootFactory {
   private UniqueAssociationFields createLiteratureUniqueAssociationFields(
       UniProtEntry uniProtEntry, DiseaseCommentStructured structuredDisease, String efo) {
     UniqueAssociationFields uaf = new UniqueAssociationFields();
-    uaf.setUniprot_release(baseFactory.getUniProtReleaseVersion());
     uaf.setDisease_uri(efo);
     uaf.setDisease_acronym(structuredDisease.getDisease().getAcronym().getValue());
     uaf.setTarget(createUniProtUrl(accession(uniProtEntry)));

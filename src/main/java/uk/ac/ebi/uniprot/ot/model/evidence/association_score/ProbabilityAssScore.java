@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ProbabilityAssScore {
   @JsonProperty private String type = "probability";
   @JsonProperty private double value;
-  @JsonProperty private AssScoreMethod method;
 
   public String getType() {
     return type;
@@ -28,13 +27,5 @@ public class ProbabilityAssScore {
 
   public void setValue(double value) {
     this.value = value;
-  }
-
-  public AssScoreMethod getMethod() {
-    return method;
-  }
-
-  public void setMethod(AssScoreMethod method) {
-    this.method = method;
   }
 }

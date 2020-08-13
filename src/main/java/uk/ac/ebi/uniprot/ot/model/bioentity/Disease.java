@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Disease {
   @JsonProperty private String id;
   @JsonProperty private String name;
+  @JsonProperty private String acronym;
 
   public String getId() {
     return id;
@@ -27,5 +28,13 @@ public class Disease {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getAcronym() {
+    return acronym;
+  }
+
+  public void setAcronym(String acronym) {
+    this.acronym = acronym;
   }
 }
