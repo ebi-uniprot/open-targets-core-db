@@ -73,10 +73,6 @@ class LiteratureCuratedRootFactory {
     lcr.setDisease(baseFactory.createDisease(structuredDisease, efoMapping));
     lcr.setEvidence(createLitEvidence(uniProtEntry, structuredDisease, pubmedEvidenceIds));
 
-    lcr.setLiterature(
-        baseFactory.createLiteratureProvenanceType(
-            new HashSet<>(baseFactory.extractPubMeds(pubmedEvidenceIds))));
-
     return lcr;
   }
 

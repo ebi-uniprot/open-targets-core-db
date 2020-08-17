@@ -88,7 +88,8 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
         litRootsMap.getOrDefault(UNIPROT_SOMATIC, Collections.emptyList());
 
     for (LiteratureCuratedRoot litRoot : uniprotLit) {
-      Set<Literature> litRefs = new HashSet<>(litRoot.getLiterature().getReferences());
+      Set<Literature> litRefs =
+          new HashSet<>(litRoot.getEvidence().getProvenance_type().getLiterature().getReferences());
       for (LiteratureCuratedRoot somaticLitRoot : somaticLit) {
         Set<Literature> somaticLitRefs =
             new HashSet<>(
@@ -152,6 +153,7 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
               });
 
     } catch (Exception e) {
+      e.printStackTrace();
       LOGGER.error(
           "Could not process entry: " + uniProtEntry.getPrimaryUniProtAccession().getValue());
       throw e;
