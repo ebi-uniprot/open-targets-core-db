@@ -1,18 +1,5 @@
 package uk.ac.ebi.uniprot.ot.model.factory;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import uk.ac.ebi.kraken.interfaces.uniprot.EvidencedValue;
-import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
-import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseNote;
-import uk.ac.ebi.kraken.model.uniprot.EvidencedValueImpl;
-import uk.ac.ebi.uniprot.ot.MockitoExtension;
-import uk.ac.ebi.uniprot.ot.model.evidence.association_score.ProbabilityAssScore;
-
-import java.util.List;
-
 import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,6 +7,19 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.ASSOCIATION_SCORE_DEFINITE;
 import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.ASSOCIATION_SCORE_INDEFINITE;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+
+import uk.ac.ebi.kraken.interfaces.uniprot.EvidencedValue;
+import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
+import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseNote;
+import uk.ac.ebi.kraken.model.uniprot.EvidencedValueImpl;
+import uk.ac.ebi.uniprot.ot.MockitoExtension;
 
 /**
  * Created 16/06/17
@@ -46,9 +46,9 @@ class BaseFactoryTest {
     evidencedValue.setValue("Curator information ...");
     List<EvidencedValue> evidenceValues = singletonList(evidencedValue);
     when(mockDiseaseNote.getTexts()).thenReturn(evidenceValues);
-    ProbabilityAssScore associationScore = baseFactory.createAssociationScore(mockDiseaseComment);
+    String confidence = baseFactory.createConfidence(mockDiseaseComment);
 
-    assertThat(associationScore.getValue(), is(ASSOCIATION_SCORE_DEFINITE));
+    assertThat(confidence, is(ASSOCIATION_SCORE_DEFINITE));
   }
 
   @Test
@@ -60,15 +60,18 @@ class BaseFactoryTest {
             + "represented in this entry. More curator information ...");
     List<EvidencedValue> evidenceValues = singletonList(evidencedValue);
     when(mockDiseaseNote.getTexts()).thenReturn(evidenceValues);
-    ProbabilityAssScore associationScore = baseFactory.createAssociationScore(mockDiseaseComment);
+    //    ProbabilityAssScore associationScore =
+    // baseFactory.createAssociationScore(mockDiseaseComment);
+    String confidence = baseFactory.createConfidence(mockDiseaseComment);
 
-    assertThat(associationScore.getValue(), is(ASSOCIATION_SCORE_INDEFINITE));
+    assertThat(confidence, is(ASSOCIATION_SCORE_INDEFINITE));
   }
 
   @Test
   void creatingAssociationScoreForNullDiseaseSucceeds() {
-    ProbabilityAssScore associationScore = baseFactory.createAssociationScore(null);
+    //    ProbabilityAssScore associationScore = baseFactory.createAssociationScore(null);
+    String confidence = baseFactory.createConfidence(null);
 
-    assertThat(associationScore, is(notNullValue()));
+    assertThat(confidence, is(notNullValue()));
   }
 }

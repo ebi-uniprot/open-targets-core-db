@@ -1,9 +1,24 @@
 package uk.ac.ebi.uniprot.ot.converter;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.CTTV_SCHEMA_VERSION;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.UNIPROT_LITERATURE;
+import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.UNIPROT_SOMATIC;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.apache.commons.io.FileUtils;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
@@ -11,28 +26,21 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.CommentType;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
 import uk.ac.ebi.uniprot.ot.input.UniProtEvSource;
 import uk.ac.ebi.uniprot.ot.model.GeneticsRoot;
-import uk.ac.ebi.uniprot.ot.model.LiteratureCuratedRoot;
 import uk.ac.ebi.uniprot.ot.model.base.Base;
 import uk.ac.ebi.uniprot.ot.model.factory.BaseFactory;
-import uk.ac.ebi.uniprot.ot.model.provenance.Literature;
 import uk.ac.ebi.uniprot.ot.validation.json.JsonSchemaValidator;
 import uk.ac.ebi.uniprot.ot.validation.json.JsonValidator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static uk.ac.ebi.uniprot.ot.model.factory.DefaultBaseFactory.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Transforms an evidence string source object into one or more {@link Base} instances.
@@ -75,36 +83,27 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
    * @param litRoots the {@link LiteratureCuratedRoot} instances
    * @param genRoots the {@link GeneticsRoot} instances
    */
-  static void removeDuplicates(List<LiteratureCuratedRoot> litRoots, List<GeneticsRoot> genRoots) {
-    Set<LiteratureCuratedRoot> obsoleteLitRoots = new HashSet<>();
-    Map<String, List<LiteratureCuratedRoot>> litRootsMap =
-        litRoots.stream().collect(Collectors.groupingBy(LiteratureCuratedRoot::getSourceID));
+  static void removeDuplicates(List<Base> litRoots, List<GeneticsRoot> genRoots) {
+    Set<Base> obsoleteLitRoots = new HashSet<>();
+    Map<String, List<Base>> litRootsMap =
+        litRoots.stream().collect(Collectors.groupingBy(Base::getDatasourceId));
 
-    List<LiteratureCuratedRoot> uniprotLit =
-        litRootsMap.getOrDefault(UNIPROT_LITERATURE, Collections.emptyList());
-    List<LiteratureCuratedRoot> somaticLit =
-        litRootsMap.getOrDefault(UNIPROT_SOMATIC, Collections.emptyList());
+    List<Base> uniprotLit = litRootsMap.getOrDefault(UNIPROT_LITERATURE, Collections.emptyList());
+    List<Base> somaticLit = litRootsMap.getOrDefault(UNIPROT_SOMATIC, Collections.emptyList());
 
-    for (LiteratureCuratedRoot litRoot : uniprotLit) {
-      Set<Literature> litRefs = new HashSet<>(litRoot.getLiterature().getReferences());
-      for (LiteratureCuratedRoot somaticLitRoot : somaticLit) {
-        Set<Literature> somaticLitRefs =
-            new HashSet<>(
-                somaticLitRoot.getEvidence().getProvenance_type().getLiterature().getReferences());
-        if (somaticLitRefs.equals(litRefs)) {
-          obsoleteLitRoots.add(litRoot);
+    for (Base litRoot : uniprotLit) {
+      Set<String> litRefs = new HashSet<>(litRoot.getLiterature());
+      for (Base somaticLitRoot : somaticLit) {
+        if (somaticLitRoot != null && somaticLitRoot.getLiterature() != null) {
+          Set<String> somaticLitRefs = new HashSet<>(somaticLitRoot.getLiterature());
+          if (somaticLitRefs.equals(litRefs)) {
+            obsoleteLitRoots.add(litRoot);
+          }
         }
       }
 
       for (GeneticsRoot genRoot : genRoots) {
-        Set<Literature> genRefs =
-            new HashSet<>(
-                genRoot
-                    .getEvidence()
-                    .getVariant2disease()
-                    .getProvenance_type()
-                    .getLiterature()
-                    .getReferences());
+        Set<String> genRefs = new HashSet<>(genRoot.getLiterature());
         if (genRefs.equals(litRefs)) {
           obsoleteLitRoots.add(litRoot);
         }
@@ -112,10 +111,10 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
     }
 
     if (!obsoleteLitRoots.isEmpty()) {
-      for (LiteratureCuratedRoot obsoleteLitRoot : obsoleteLitRoots) {
+      for (Base obsoleteLitRoot : obsoleteLitRoots) {
         LOGGER.debug(
             "Removing obsolete literature curated root [{}]",
-            obsoleteLitRoot.getUnique_association_fields());
+            obsoleteLitRoot.getTargetFromSourceId());
       }
     }
     litRoots.removeAll(obsoleteLitRoots);
@@ -133,7 +132,7 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
           .forEach(
               disease -> {
                 // create the disease association pojos
-                List<LiteratureCuratedRoot> litRoots =
+                List<Base> litRoots =
                     this.baseFactory.createLiteratureCuratedRoot(uniProtEntry, disease);
                 List<GeneticsRoot> genRoots =
                     this.baseFactory.createGeneticsRoots(uniProtEntry, disease);
