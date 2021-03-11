@@ -46,7 +46,7 @@ class GeneticsRootFactory {
     GeneticsRoot gr = new GeneticsRoot();
     gr.setDatatypeId(GENETIC_ASSOCIATION);
     gr.setDiseaseFromSource(structuredDisease.getDisease().getDiseaseId().getValue());
-    gr.setDiseaseFromSourceMappedId(DefaultBaseFactory.getMappedId(efo)); // need to check
+    gr.setDiseaseFromSourceMappedId(DefaultBaseFactory.getMappedId(efo));
     gr.setTargetFromSourceId(uniProtEntry.getPrimaryUniProtAccession().getValue());
     gr.setTargetModulation(ACTIVITY_UP_DOWN);
     gr.setDatasourceId(DefaultBaseFactory.UNIPROT_VARIANT);
@@ -57,7 +57,6 @@ class GeneticsRootFactory {
     gr.setDiseaseFromSourceId(
         OMIM + structuredDisease.getDisease().getReference().getDiseaseReferenceId().getValue());
     gr.setConfidence(baseFactory.createConfidence(structuredDisease));
-    //    String variantRsId = String.join(",", vli.getDbSNPs());
     gr.setVariantRsId(dbSNP);
     return gr;
   }
