@@ -62,7 +62,7 @@ class GeneticsRootFactory {
     return gr;
   }
 
-  public static String getFunctionalConsequence(VariantLineInfo vli) {
+  private String getFunctionalConsequence(VariantLineInfo vli) {
     switch (vli.getType()) {
       case MISSENSE:
         return SO_SUBSTITUTION_URI;

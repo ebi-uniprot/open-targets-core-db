@@ -60,8 +60,6 @@ class BaseFactoryTest {
             + "represented in this entry. More curator information ...");
     List<EvidencedValue> evidenceValues = singletonList(evidencedValue);
     when(mockDiseaseNote.getTexts()).thenReturn(evidenceValues);
-    //    ProbabilityAssScore associationScore =
-    // baseFactory.createAssociationScore(mockDiseaseComment);
     String confidence = baseFactory.createConfidence(mockDiseaseComment);
 
     assertThat(confidence, is(ASSOCIATION_SCORE_INDEFINITE));
@@ -69,9 +67,7 @@ class BaseFactoryTest {
 
   @Test
   void creatingAssociationScoreForNullDiseaseSucceeds() {
-    //    ProbabilityAssScore associationScore = baseFactory.createAssociationScore(null);
     String confidence = baseFactory.createConfidence(null);
-
     assertThat(confidence, is(notNullValue()));
   }
 }
