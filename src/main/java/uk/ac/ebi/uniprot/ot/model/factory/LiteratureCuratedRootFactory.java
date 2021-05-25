@@ -55,7 +55,9 @@ class LiteratureCuratedRootFactory {
     Base lcr = new Base();
     lcr.setDatatypeId(GENETIC_LITERATURE);
     lcr.setDiseaseFromSource(structuredDisease.getDisease().getDiseaseId().getValue());
-    lcr.setDiseaseFromSourceMappedId(DefaultBaseFactory.getMappedId(efoMapping));
+    if (efoMapping != null) {
+      lcr.setDiseaseFromSourceMappedId(DefaultBaseFactory.getMappedId(efoMapping));
+    }
     lcr.setTargetFromSourceId(uniProtEntry.getPrimaryUniProtAccession().getValue());
     lcr.setTargetModulation(ACTIVITY_UP_DOWN);
     return lcr;
