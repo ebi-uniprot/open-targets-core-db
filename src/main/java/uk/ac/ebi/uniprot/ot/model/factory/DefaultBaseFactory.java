@@ -3,9 +3,18 @@ package uk.ac.ebi.uniprot.ot.model.factory;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -14,28 +23,24 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ebi.kraken.interfaces.common.Value;
 import uk.ac.ebi.kraken.interfaces.uniprot.HasEvidences;
 import uk.ac.ebi.kraken.interfaces.uniprot.UniProtEntry;
-import uk.ac.ebi.kraken.interfaces.uniprot.citationsNew.Citation;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseCommentStructured;
 import uk.ac.ebi.kraken.interfaces.uniprot.comments.DiseaseNote;
 import uk.ac.ebi.kraken.interfaces.uniprot.evidences.EvidenceId;
-import uk.ac.ebi.kraken.interfaces.uniprot.features.Feature;
 import uk.ac.ebi.kraken.interfaces.uniprot.features.FeatureType;
 import uk.ac.ebi.kraken.interfaces.uniprot.features.VariantFeature;
 import uk.ac.ebi.uniprot.ot.mapper.Omim2EfoMapper;
 import uk.ac.ebi.uniprot.ot.mapper.SomaticDbSNPMapper;
 import uk.ac.ebi.uniprot.ot.model.GeneticsRoot;
-import uk.ac.ebi.uniprot.ot.model.LiteratureCuratedRoot;
+import uk.ac.ebi.uniprot.ot.model.base.Base;
 import uk.ac.ebi.uniprot.ot.model.bioentity.Disease;
 import uk.ac.ebi.uniprot.ot.model.bioentity.Target;
 import uk.ac.ebi.uniprot.ot.model.evidence.LinkOut;
-import uk.ac.ebi.uniprot.ot.model.evidence.association_score.ProbabilityAssScore;
 import uk.ac.ebi.uniprot.ot.model.provenance.DatabaseProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.provenance.Literature;
 import uk.ac.ebi.uniprot.ot.model.provenance.LiteratureProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.provenance.ProvenanceType;
 import uk.ac.ebi.uniprot.ot.model.variant.VariantLineInfo;
 
-import com.google.common.util.concurrent.AtomicDouble;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -48,14 +53,14 @@ public class DefaultBaseFactory implements BaseFactory {
   public static final String UNIPROT_SOMATIC = "uniprot_somatic";
   public static final String DB_SNP_URI_FORMAT = "http://identifiers.org/dbsnp/%s";
   public static final String UNIPROT_LITERATURE = "uniprot_literature";
-  public static final String CTTV_SCHEMA_VERSION = "1.7.5";
+  public static final String CTTV_SCHEMA_VERSION = "2.0.8";
   // logger
   protected static final Logger LOGGER = LoggerFactory.getLogger(DefaultBaseFactory.class);
   static final String ACCESS_LEVEL = "public";
   static final String UNIPROT = "uniprot";
   static final String LINK_OUT_NICE_NAME_PUBLISHED_REFERENCE = "Published reference";
-  static final double ASSOCIATION_SCORE_DEFINITE = 1.0;
-  static final double ASSOCIATION_SCORE_INDEFINITE = 0.5;
+  static final String ASSOCIATION_SCORE_DEFINITE = "high";
+  static final String ASSOCIATION_SCORE_INDEFINITE = "medium";
   static final String SCORE_METHOD_DESCRIPTION = "Curator inference (either 1.0 or 0.5)";
   static final String ASSOCIATIONS_SCORE_METHOD_DESCRIPTION_URL =
       "https://github.com/CTTV/association_score_methods/blob/master/CTTV011_UniProt/description.md";
@@ -71,7 +76,7 @@ public class DefaultBaseFactory implements BaseFactory {
   public static final String SO_SEQ_ALTERATION_URI = String.format(ECO_URI_FORMAT, "SO_0001059");
   private static final String UNIPROT_URI_FORMAT = IDENTIFIERS_URI + "/uniprot/%s";
   private static final String UNIPROT_DISEASE_URI_FORMAT = UNIPROT_URI + "#pathology_and_biotech";
-  private static final String ACTIVITY_UP_DOWN = "http://identifiers.org/cttv.activity/up_or_down";
+  protected static final String ACTIVITY_UP_DOWN = "up_or_down";
   private static final String PROTEIN_TARGET =
       "http://identifiers.org/cttv.target/protein_evidence";
   private static final List<String> INDEFINITE_DISEASE_NOTE_ASSOCIATIONS =
@@ -86,6 +91,7 @@ public class DefaultBaseFactory implements BaseFactory {
   private static final String PUBMED_EVIDENCE_TYPE = "PubMed";
   private static final String ECO_0000269 = "ECO:0000269";
   private static final String ECO_0000303 = "ECO:0000303";
+  public static final String UNIPROT_VARIANT = "uniprot_variants";
   private final LiteratureCuratedRootFactory literatureCuratedRootFactory =
       new LiteratureCuratedRootFactory(this);
   private final GeneticsRootFactory geneticsRootFactory = new GeneticsRootFactory(this);
@@ -106,54 +112,31 @@ public class DefaultBaseFactory implements BaseFactory {
   }
 
   @Override
-  public List<LiteratureCuratedRoot> createLiteratureCuratedRoot(
+  public List<Base> createLiteratureCuratedRoot(
       UniProtEntry uniProtEntry, DiseaseCommentStructured structuredDisease) {
-    List<LiteratureCuratedRoot> lcrs = new ArrayList<>();
+    List<Base> lcrs = new ArrayList<>();
 
     // get all disease evidence ids with pubmed references
     List<EvidenceId> diseasePubmedEvs = extractAllPubMedEvidenceIds(structuredDisease);
 
     // pubmed evidence ids exist for this disease
     if (!diseasePubmedEvs.isEmpty()) {
+      boolean found = false;
       for (String efo : efoMappings(structuredDisease)) {
-        // for each variant,  of the disease, and if
-        for (Feature variantFeature : uniProtEntry.getFeatures(FeatureType.VARIANT)) {
-          List<EvidenceId> variantPubmedEvs =
-              variantFeature.getEvidenceIds().stream()
-                  .filter(evId -> evId.getTypeValue().equals(PUBMED_EVIDENCE_TYPE))
-                  .collect(Collectors.toList());
-
-          // ... containing pubmed evidence ids
-          if (!variantPubmedEvs.isEmpty()) {
-            VariantFeature variant = (VariantFeature) variantFeature;
-            VariantLineInfo vli = VariantLineInfo.createInstance(variant);
-
-            if (isSomatic(uniProtEntry, efo, vli)
-                && vli.containsDbSNPInfoForDisease(structuredDisease)) {
-              lcrs.add(
-                  literatureCuratedRootFactory.createLiteratureCuratedRoot(
-                      uniProtEntry, structuredDisease, variantPubmedEvs, efo, vli));
-            }
-          }
-        }
-
+        // for each variant, of the disease, and if
         // always add evidence for the basic disease
         lcrs.add(
             literatureCuratedRootFactory.createLiteratureCuratedRoot(
                 uniProtEntry, structuredDisease, diseasePubmedEvs, efo));
+        found = true;
       }
 
-      //            efoMappings(structuredDisease)
-      //                    .forEach(efo -> {
-      //                        // always add evidence for the basic disease
-      //                        lcrs.add(literatureCuratedRootFactory.createLiteratureCuratedRoot(
-      //                                uniProtEntry,
-      //                                structuredDisease,
-      //                                pubmedEvidenceIds,
-      //                                efo));
-      //                    });
+      if (!found) {
+        lcrs.add(
+            literatureCuratedRootFactory.createLiteratureCuratedRoot(
+                uniProtEntry, structuredDisease, diseasePubmedEvs, null));
+      }
     }
-
     return lcrs;
   }
 
@@ -161,28 +144,46 @@ public class DefaultBaseFactory implements BaseFactory {
   public List<GeneticsRoot> createGeneticsRoots(
       UniProtEntry uniProtEntry, DiseaseCommentStructured structuredDisease) {
     List<GeneticsRoot> grs = new ArrayList<>();
-
+    AtomicBoolean found = new AtomicBoolean(false);
     efoMappings(structuredDisease)
         .forEach(
             efo -> {
-              uniProtEntry
-                  .getFeatures(FeatureType.VARIANT)
-                  .forEach(
-                      variantFeature -> {
-                        // for every variant feature ...
-                        List<EvidenceId> pubmedEvIds =
-                            variantFeature.getEvidenceIds().stream()
-                                .filter(evId -> evId.getTypeValue().equals(PUBMED_EVIDENCE_TYPE))
-                                .collect(Collectors.toList());
+              found.set(true);
+              createGeneticRoots(uniProtEntry, structuredDisease, grs, efo);
+            });
+    if (!found.get()) {
+      createGeneticRoots(uniProtEntry, structuredDisease, grs, null);
+    }
 
-                        // ... containing pubmed evidence ids
-                        if (!pubmedEvIds.isEmpty()) {
-                          VariantFeature variant = (VariantFeature) variantFeature;
-                          VariantLineInfo vli = VariantLineInfo.createInstance(variant);
+    return grs;
+  }
 
-                          // generate only germline genetics info
-                          if (!isSomatic(uniProtEntry, efo, vli)
-                              && vli.containsDbSNPInfoForDisease(structuredDisease)) {
+  private void createGeneticRoots(
+      UniProtEntry uniProtEntry,
+      DiseaseCommentStructured structuredDisease,
+      List<GeneticsRoot> grs,
+      String efo) {
+    uniProtEntry
+        .getFeatures(FeatureType.VARIANT)
+        .forEach(
+            variantFeature -> {
+              // for every variant feature ...
+              List<EvidenceId> pubmedEvIds =
+                  variantFeature.getEvidenceIds().stream()
+                      .filter(evId -> evId.getTypeValue().equals(PUBMED_EVIDENCE_TYPE))
+                      .collect(Collectors.toList());
+
+              // ... containing pubmed evidence ids
+              if (!pubmedEvIds.isEmpty()) {
+                VariantFeature variant = (VariantFeature) variantFeature;
+                VariantLineInfo vli = VariantLineInfo.createInstance(variant);
+
+                // generate only germline genetics info
+                if (!isSomatic(uniProtEntry, efo, vli)
+                    && vli.containsDbSNPInfoForDisease(structuredDisease)) {
+                  vli.getDbSNPs()
+                      .forEach(
+                          dbSNP -> {
                             grs.add(
                                 geneticsRootFactory.createGeneticsRoot(
                                     uniProtEntry,
@@ -191,31 +192,12 @@ public class DefaultBaseFactory implements BaseFactory {
                                     efo,
                                     variantFeature,
                                     variant,
-                                    vli));
-                          }
-                        }
-                      });
+                                    vli,
+                                    dbSNP));
+                          });
+                }
+              }
             });
-
-    return grs;
-  }
-
-  static String latestPubMed(UniProtEntry uniProtEntry, Collection<String> pubmedIds) {
-    for (Citation citation : uniProtEntry.getCitationsNew()) {
-      for (String pubmedId : pubmedIds) {
-        if (pubmedId.equals(citation.getCitationXrefs().getPubmedId().getValue())) {
-          // return first match, as this is the most significant
-          return pubmedId;
-        }
-      }
-    }
-    if (pubmedIds.isEmpty()) {
-      LOGGER.warn(
-          "Could not find entry's pubmed for accession {} where pubmeds are {} -- using first one",
-          accession(uniProtEntry),
-          pubmedIds);
-    }
-    return pubmedIds.iterator().next();
   }
 
   static String createUniProtUrl(String accession) {
@@ -315,7 +297,8 @@ public class DefaultBaseFactory implements BaseFactory {
       ecos.remove(standard269EcoUrl);
       ecos.add(CTTV_FAVOURED_CURATED_EVIDENCE_ECO);
 
-      // if we've just replaced a 269 -> 205, and still there's a 303, remove the 303, because 205
+      // if we've just replaced a 269 -> 205, and still there's a 303, remove the 303,
+      // because 205
       // is stronger
       if (ecos.contains(standard303EcoUrl)) {
         ecos.remove(standard303EcoUrl);
@@ -352,30 +335,31 @@ public class DefaultBaseFactory implements BaseFactory {
     return lpt;
   }
 
-  ProbabilityAssScore createAssociationScore(DiseaseCommentStructured structuredDisease) {
-    AtomicDouble assocScore = new AtomicDouble(ASSOCIATION_SCORE_DEFINITE);
+  protected String createConfidence(DiseaseCommentStructured structuredDisease) {
+    String confidence = ASSOCIATION_SCORE_DEFINITE;
 
     if (structuredDisease != null) {
       DiseaseNote note = structuredDisease.getNote();
       if (note != null) {
-        note.getTexts().stream()
-            .map(Value::getValue)
-            .filter(this::associationScoreForDiseaseNoteIsNotDefinite)
-            .findFirst()
-            .ifPresent(s -> assocScore.set(ASSOCIATION_SCORE_INDEFINITE));
+        Optional<String> val =
+            note.getTexts().stream()
+                .map(Value::getValue)
+                .filter(this::associationScoreForDiseaseNoteIsNotDefinite)
+                .findFirst();
+        if (val.isPresent()) {
+          confidence = ASSOCIATION_SCORE_INDEFINITE;
+        }
       }
     }
 
-    ProbabilityAssScore score = new ProbabilityAssScore();
-    score.setValue(assocScore.get());
-    return score;
+    return confidence;
   }
 
   private boolean isSomatic(UniProtEntry uniProtEntry, String efo, VariantLineInfo vli) {
     String accession = uniProtEntry.getPrimaryUniProtAccession().getValue();
     List<String> dbSNPs = vli.getDbSNPs();
 
-    if (dbSNPs.size() == 1) {
+    if (dbSNPs.size() == 1 && efo != null) {
       return somaticDbSNPCache.isSomatic(accession, efo, dbSNPs.get(0));
     } else {
       return false;
@@ -414,5 +398,17 @@ public class DefaultBaseFactory implements BaseFactory {
       }
     }
     return false;
+  }
+
+  public static String getMappedId(String efo) {
+    try {
+      URI uri = new URI(efo);
+      String[] segments = uri.getPath().split("/");
+      String idStr = segments[segments.length - 1];
+      return idStr;
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

@@ -58,11 +58,11 @@ class JsonSchemaValidatorTest {
   @Test
   void shouldValidateInstanceWithSchema() throws IOException {
     Base es = new Base();
-    es.setAccess_level("public");
-    es.setValidated_against_schema_version("0.0.0");
-    es.setSourceID("accession");
+    //    es.setAccess_level("public");
+    //    es.setValidated_against_schema_version("0.0.0");
+    es.setDatasourceId("accession");
     UniqueAssociationFields uaf = new UniqueAssociationFields();
-    es.setUnique_association_fields(uaf);
+    //    es.setUnique_association_fields(uaf);
 
     JsonSchemaValidator validator = new JsonSchemaValidator();
     ObjectMapper mapper = new ObjectMapper();

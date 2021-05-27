@@ -13,7 +13,7 @@ if [ ! -f $input_json ]; then
     exit 1
 else
     dir_original=$(dirname $(readlink -e $input_json))
-    to_upload=$(date +"$dir_original/cttv011-%d-%m-%Y.json.gz")
+    to_upload=$(date +"./cttv011-%d-%m-%Y.json.gz")
     gzip -c $input_json > "$to_upload"
     echo "$input_json converted to $to_upload, ready for uploading"
 fi
