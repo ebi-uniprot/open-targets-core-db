@@ -80,7 +80,7 @@ if [ ! -z "$VERSION" ]; then
     echo "[$version]"
 else
     echo "Fetching public UniProt version number"
-    version="$(curl -s -I "https://www.uniprot.org/downloads" | grep -i "x-uniprot-release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
+    version="$(curl -s -I "https://rest.uniprot.org/uniprotkb/admin/health" | grep -i "x-uniprot-release" | grep -o "20[0-9]\{2\}_[0-9]\{2\}")"
     echo "[$version]"
 fi
 
