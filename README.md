@@ -31,4 +31,4 @@ Should you need to contact the CoreDB team, they can be emailed here: [data@open
 1. Please make sure the json version is up-to-date in DefaultBaseFactory.java (CTTV_SCHEMA_VERSION) as required by open target team
 2. Please make sure the japi version in pom is pointing to latest private repo - https://mvnrepository.com/artifact/uk.ac.ebi.uniprot/japi?repo=ebi-repo
 3. Rerun the command if it fails for java.net.SocketTimeoutException: Read timed out
-4. Python version 2 required
+4. ~~Python version 2 required~~ 31.10.2022 Python2 is not supported anymore and script will fail because of inline python2 code. Changed to python3 syntax, so no requirement of python2.
