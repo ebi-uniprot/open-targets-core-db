@@ -45,7 +45,7 @@ headers="Accept: application/json"
 url="https://www.ebi.ac.uk/ols/api/ontologies/efo/terms?size=$size"
 totalPages="$(curl --silent "$url" -H "$headers" | python -c '
 import sys, json
-print "{}".format(json.load(sys.stdin)["page"]["totalPages"])
+print("{}".format(json.load(sys.stdin)["page"]["totalPages"]))
 '
 )"
 
@@ -76,18 +76,18 @@ try:
          #print term
          if term["obo_xref"] != None:
             if omim2efo == "omim2efo":
-               #print "bbb"
+               #print("bbb")
 
                for obo_xref in term["obo_xref"]:
-                  #print "ccc"
+                  #print("ccc")
 
                   if obo_xref["database"] == "OMIM":
                      omim = obo_xref["id"]
-                     print "OMIM:{}\t{}\t{}".format(omim, efo, term["label"])
+                     print("OMIM:{}\t{}\t{}".format(omim, efo, term["label"]))
             elif omim2efo == "longEfo2Omim":
-               print "{}\t{}\t{}".format(efo, term["label"], ",".join(term["annotation"]["OMIM_definition_citation"]))
+               print("{}\t{}\t{}".format(efo, term["label"], ",".join(term["annotation"]["OMIM_definition_citation"])))
             else:
-               print "{}\t{}".format(efo, ",".join(term["annotation"]["OMIM_definition_citation"]))
+               print("{}\t{}".format(efo, ",".join(term["annotation"]["OMIM_definition_citation"])))
 except KeyError:
     pass
 '
