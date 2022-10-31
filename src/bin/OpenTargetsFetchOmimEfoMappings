@@ -53,8 +53,7 @@ print("{}".format(json.load(sys.stdin)["page"]["totalPages"]))
 ## ---------------------------- FETCH EACH PAGE OF RESULTS AND FIND THE OMIM/EFO MAPPINGS ----------------------------
 for pageNum in $(seq 1 $totalPages); do
    url="https://www.ebi.ac.uk/ols/api/ontologies/efo/terms?page=$pageNum&size=$size"
-
-   curl --silent "$url" -H "$headers" | python -c '
+   curl --silent "$url" -H "$headers" | PYTHONIOENCODING=utf8 python -c '
 import sys, json, os
 
 omim2efo=os.environ["omim2efo"]
@@ -65,8 +64,8 @@ omim2efo=os.environ["omim2efo"]
 #UTF8Reader = codecs.getreader("utf8")
 #sys.stdin = UTF8Reader(sys.stdin)
 
-reload(sys)
-sys.setdefaultencoding("utf-8")
+#reload(sys)
+#sys.setdefaultencoding("utf-8")
 
 terms=json.load(sys.stdin)
 try:
