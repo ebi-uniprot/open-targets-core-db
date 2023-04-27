@@ -54,8 +54,7 @@ public class UniProtDiseaseAssocCollator implements Converter<UniProtEvSource, C
   private static final String SCHEMA_ADDRESS =
       "https://raw.githubusercontent.com/opentargets/json_schema/"
           + CTTV_SCHEMA_VERSION
-          + "/opentargets.json";
-
+          + "/schemas/disease_target_evidence.json";
   private final JsonValidator validator;
   private final Schema jsonSchema;
   private ObjectMapper objectMapper;
